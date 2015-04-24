@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
-	<h2>test php 1ere branche</h2>
+	<h2>test php 1ere branche abcd</h2>
 
 	<p>
 		Cette ligne a �t� �crite enti�rement en HTML.<br />
