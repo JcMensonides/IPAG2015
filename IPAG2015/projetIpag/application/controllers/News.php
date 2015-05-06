@@ -23,6 +23,7 @@ public function view($slug = NULL)
 
         if (empty($data['news_item']))
         {
+        		echo "c'est vide";
                 show_404();
         }
 
