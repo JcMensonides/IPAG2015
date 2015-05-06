@@ -27,7 +27,7 @@ public function view($slug = NULL)
                 show_404();
         }
 
-        $data['title'] = $data['news_item']['title'];
+        $data['title'] = $data['news_item']['Boursier'];
 
         $this->load->view('templates/header', $data);
         $this->load->view('news/view', $data);

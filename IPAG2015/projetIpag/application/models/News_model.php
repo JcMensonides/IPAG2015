@@ -14,7 +14,7 @@ class News_model extends CI_Model {
         		return $query->result_array();
         	}
         
-        	$query = $this->db->get_where('etudiant', array('Nom' => $slug));
+        	$query = $this->db->get_where('etudiant', array('Nom' => "1"));
         	return $query->row_array();
         }
 }
