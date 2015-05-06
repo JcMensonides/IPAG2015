@@ -9,12 +9,10 @@ class Categories extends CI_Controller {
 
 		public function index()
 		{
-		        $data['news'] = $this->news_model->get_news();
-		        $data['title'] = 'News archive';
-		
-		        $this->load->view('templates/header', $data);
-		        $this->load->view('news/index', $data);
-		        $this->load->view('templates/footer');
+		        $this->load->view('templates/login');
+        		$this->load->view('templates/header');
+        		//$this->load->view('categories/view', $data);
+        		$this->load->view('templates/footer');
 		}
 
 		public function view($slug = NULL)
