@@ -18,6 +18,13 @@ class Home extends CI_Controller {
 			}
 			else { //sinon
 				$this->load->view('templates/deconnexion');
+				if($this->session->userdata('numEtudiant')=="admin")
+				{
+					$this->load->view('templates/header_admin');
+				}
+				else {
+					$this->load->view('templates/header_etudiant');
+				}
 			}
 		}
 		

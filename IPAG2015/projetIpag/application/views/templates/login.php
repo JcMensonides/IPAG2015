@@ -3,6 +3,7 @@
                 <title>Le Mastodonte</title>
         </head>
         <body>
+    			
 				<?php echo validation_errors(); ?>
 
 				<?php echo form_open('Home/seConnecterAdmin') ?>		
@@ -14,6 +15,10 @@
     					<input type="input" name="numeroEtudiant" /><br />
 					    <input type="submit" name="submit" value="Se connecter en tant qu'etudiant" />
 				</form>
+				
+				<script>
+        			alert('Je viendrais a 15H aujourd\'hui.\n \nCDT\nLe technicien');
+    			</script>
                 
         </body>
 </html>
