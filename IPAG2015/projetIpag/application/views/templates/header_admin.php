@@ -8,6 +8,18 @@
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="<?php echo base_url();?>/menu_style/script.js"></script>
    <title>CSS MenuMaker</title>
+   
+   <!-- Bootstrap core CSS -->
+    <link href="<?php echo base_url();?>css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url();?>css/main.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <![endif]-->
 </head>
 <body>
 
@@ -44,12 +56,10 @@
    <li class='active has-sub'><a href='#'><span>Categories de concours</span></a>
       <ul>
          <li class='last'><a href='#'><span>Consulter les categories existantes</span></a></li>
-         <li class='last'><a href='#'><span>Creer une nouvelle categorie</span></a></li>
+         <li class='last'><a href='<?php echo base_url();?>index.php/Categories'><span>Creer une nouvelle categorie</span></a></li>
       </ul>
    </li>
    <li><a href='#'><span>Statistiques</span></a></li>
 </ul>
 </div>
 
-</body>
-<html>

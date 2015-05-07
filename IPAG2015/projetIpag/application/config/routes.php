@@ -55,4 +55,6 @@ $route['Home/seConnecterAdmin'] = 'Home/seConnecterAdmin';
 $route['Home/seConnecterEtudiant'] = 'Home/seConnecterEtudiant';
 $route['Home/seDeconnecter'] = 'Home/seDeconnecter';
 
+
+
 //$route['(:any)'] = 'news/view/$1';

@@ -30,6 +30,7 @@ class Home extends CI_Controller {
 		
 		public function seConnecterAdmin()
 		{
+			
 			//On genere la session admin
 			$donneesDeSession = array(
 				'numEtudiant' => "admin",
@@ -40,28 +41,28 @@ class Home extends CI_Controller {
 		
 		public function seConnecterEtudiant()
 		{
-			$this->form_validation->set_rules('numeroEtudiant', 'Numero Etudiant', 'required|callback_ExistNumEtudiant');
-			//$this->form_validation->set_rules('numeroEtudiant', 'Numero Etudiant', 'callback_ExistNumEtudiant');
-
-			if ($this->form_validation->run() === FALSE)
-			{
-				$this->load->view('templates/login');
-			}
-			else
-			{
-				if (!($this->Login_model->ExistNumEtudiant()))
-						{
-							
-						}
-				else {
-					//On genere la session etudiant
-					$donneesDeSession = array(
-							'numEtudiant' => $this->input->post('numeroEtudiant'),
-					);
-					$this->session->set_userdata($donneesDeSession);
-					redirect('/Home', 'refresh');
-				}
-			}
+			 
+		 	$this->form_validation->set_rules('numeroEtudiant', 'Numero Etudiant', 'required|callback_ExistNumEtudiant');
+		 	
+		 	if ($this->form_validation->run() === FALSE)
+		 	{
+		 		$this->load->view('templates/login');
+		 	}
+		 	else
+		 	{
+		 		if (!($this->Login_model->ExistNumEtudiant()))
+		 		{
+		 				
+		 		}
+		 		else {
+		 			//On genere la session etudiant
+		 			$donneesDeSession = array(
+		 					'numEtudiant' => $this->input->post('numeroEtudiant'),
+		 			);
+		 			$this->session->set_userdata($donneesDeSession);
+		 			redirect('/Home', 'refresh');
+		 		}
+		 	}
 		}
 		
 		function ExistNumEtudiant($numEtudiant)

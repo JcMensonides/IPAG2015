@@ -1,20 +1,29 @@
 <?php
-class News_model extends CI_Model {
+class Categories_model extends CI_Model {
 
         public function __construct()
         {
                 $this->load->database();
         }
         
-        public function get_news($slug = FALSE)
-        {
-        	if ($slug === FALSE)
-        	{
-        		$query = $this->db->get('etudiant');
-        		return $query->result_array();
-        	}
-        
-        	$query = $this->db->get_where('etudiant', array('Nom' => "1"));
-        	return $query->row_array();
+        public function ajoutCategorie(){
+        	$sql = "INSERT INTO categorie (LibelleCategorie) VALUES (?)";
+        	$query = $this->db->query($sql, array($this->input->post('nomCategorie')));
         }
+        
+        public function nomCategorieDisponible()
+        {
+        	$sql = "SELECT LibelleCategorie FROM categorie WHERE LibelleCategorie = ?";
+        	$query = $this->db->query($sql, array($this->input->post('nomCategorie')));
+        
+        	return(empty($query->result()));
+        }
+        
+        public function getCategoriesList() {
+        	$sql = "SELECT NumCategorie, LibelleCategorie FROM categorie";
+        	$query = $this->db->query($sql);
+        	
+        	return($query->result_array());
+        }
+        
 }

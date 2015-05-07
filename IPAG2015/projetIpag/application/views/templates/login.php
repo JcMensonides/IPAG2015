@@ -7,18 +7,14 @@
 				<?php echo validation_errors(); ?>
 
 				<?php echo form_open('Home/seConnecterAdmin') ?>		
-					    <input type="submit" name="submit" value="Se connecter en tant qu'admin" />
+					    <input type="submit" name="login_form" value="Se connecter en tant qu'admin" />
 				</form>
 				
 				<?php echo form_open('Home/seConnecterEtudiant') ?>
 					    <label for="numeroEtudiant">Numero etudiant : </label>
     					<input type="input" name="numeroEtudiant" /><br />
-					    <input type="submit" name="submit" value="Se connecter en tant qu'etudiant" />
+					    <input type="submit" name="login_form" value="Se connecter en tant qu'etudiant" />
 				</form>
-				
-				<script>
-        			alert('Je viendrais a 15H aujourd\'hui.\n \nCDT\nLe technicien');
-    			</script>
                 
         </body>
 </html>
