@@ -80,9 +80,13 @@ class Home extends CI_Controller {
 			redirect('/Home', 'refresh');
 		}
 		
+		public function creationdeCategorie() {
+			$this->load->view('categories/categories_ajout');
+		}
+		
 
-	public function view()
-	{
+		public function view()
+		{
 			$this->load->view('templates/login');
-	}
+		}
 }

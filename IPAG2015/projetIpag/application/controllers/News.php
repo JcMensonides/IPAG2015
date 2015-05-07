@@ -18,7 +18,9 @@ class News extends CI_Controller {
 		        $this->load->view('templates/footer');
 		}
 
+
 public function view()
+
 {
         $data['news_item'] = $this->news_model->get_news($slug);
 
@@ -30,7 +32,9 @@ public function view()
 
         $data['title'] = $data['news_item']['Boursier'];
 
-        $this->load->view('templates/login');
+
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('news/view', $data);
         $this->load->view('templates/footer');

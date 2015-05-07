@@ -51,8 +51,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Home';
 $route['Home/(:any)'] = 'index.php/Home';
+$route['Categories/(:any)'] = 'index.php/Categories';
+
 $route['Home/seConnecterAdmin'] = 'Home/seConnecterAdmin';
 $route['Home/seConnecterEtudiant'] = 'Home/seConnecterEtudiant';
 $route['Home/seDeconnecter'] = 'Home/seDeconnecter';
+$route['Home/creationdeCategorie'] = 'Home/creationdeCategorie';
+
+$route['Categories/CreateCategorie'] = 'Categories/CreateCategorie';
 
 //$route['(:any)'] = 'news/view/$1';

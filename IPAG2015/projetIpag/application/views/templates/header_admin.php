@@ -44,7 +44,7 @@
    <li class='active has-sub'><a href='#'><span>Categories de concours</span></a>
       <ul>
          <li class='last'><a href='#'><span>Consulter les categories existantes</span></a></li>
-         <li class='last'><a href='#'><span>Creer une nouvelle categorie</span></a></li>
+         <li class='last'><a href='Home/creationdeCategorie'><span>Creer une nouvelle categorie</span></a></li>
       </ul>
    </li>
    <li><a href='#'><span>Statistiques</span></a></li>

@@ -17,4 +17,18 @@ class News_model extends CI_Model {
         	$query = $this->db->get_where('etudiant', array('Nom' => "1"));
         	return $query->row_array();
         }
+        
+        public function ExistCategorie()
+        {
+        	$sql = "SELECT LibelleCategorie FROM categorie WHERE LibelleCategorie = ?";
+        	$query = $this->db->query($sql, array($this->input->post('LibelleCategorie')));
+        
+        	return(!empty($query->result()));
+        }
+        public function CreateCategorie()
+        {
+        	$sql ="INSERT INTO categorie('LibelleCategorie') VALUES ('?')";
+        	echo $this->input->post('LibelleCategorie');
+        	$query = $this->db->query($sql ,array($this->input->post('LibelleCategorie')));
+        }
 }

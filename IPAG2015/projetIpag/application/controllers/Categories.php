@@ -5,6 +5,7 @@ class Categories extends CI_Controller {
         {
                 parent::__construct();
                 $this->load->model('news_model');
+                $this->load->model('Categories_model');
         }
 
 		public function index()
@@ -31,4 +32,21 @@ class Categories extends CI_Controller {
 		        $this->load->view('news/view', $data);
 		        $this->load->view('templates/footer');
 		}
+		
+		function ExistCategorie($Categorie)
+		{
+			if($this->Categories_model->ExistCategorie($Categorie)) {
+				$this->form_validation->set_message('ExistCategorie', 'La categorie existe pas');
+				return TRUE;
+			}
+			else {
+				$this->form_validation->set_message('ExistCategorie', 'La categorie n\'existe pas');
+				return FALSE;
+		}
+		function CreateCategorie($Categorie) 
+		{
+			$this->Categories_model->CreateCategorie($Categorie);
+			$this->load->view('categories/categories_ajout');
+		}
+	}
 }
