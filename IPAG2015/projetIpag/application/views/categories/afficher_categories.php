@@ -13,10 +13,13 @@
                     </li>
                     
                     <li class="plan-action">
-                    <form id="<?php echo $uneCategorie['LibelleCategorie'];?>" method="post" action="#"> <input type="hidden" name="<?php echo $uneCategorie['LibelleCategorie'];?>"/> <a class="btn btn-danger btn-lg" href="#" onclick="document.<?php echo $uneCategorie['LibelleCategorie'];?>.submit();">Modifier </a> </form>
+                    <form id="<?php echo $uneCategorie['LibelleCategorie'];?>" method="post" action="<?php base_url();?>index.php/Categories/updateCategory"> <input type="hidden" name="<?php echo $uneCategorie['LibelleCategorie'];?>"/> <a class="btn btn-danger btn-lg" href="#" onclick="document.<?php echo $uneCategorie['LibelleCategorie'];?>.submit();">Modifier </a> </form>
                     </li>
                     <li class="plan-action">
-                    <form id="<?php echo $uneCategorie['LibelleCategorie'];?>" method="post" action="#"> <input type="hidden" name="<?php echo $uneCategorie['LibelleCategorie'];?>"/> <a class="btn btn-danger btn-lg" href="#" onclick="document.<?php echo $uneCategorie['LibelleCategorie'];?>.submit();">Supprimer </a> </form>
+                    	<?php echo form_open('Categories/supprimerCategorie') ?>
+                    		<input type="hidden" name=NumCategorie value="<?php echo $uneCategorie['NumCategorie'];?>"/>		
+					    	<input class="btn btn-danger btn-lg" type="submit" name="supprimerCategorie" value="Supprimer" />
+						</form>
                     </li>
                     
                 </ul>

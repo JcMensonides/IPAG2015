@@ -20,8 +20,10 @@ class Categories extends CI_Controller {
 				$this->load->view('templates/deconnexion');
 				if($this->session->userdata('numEtudiant')=="admin")
 				{
+					$data['listCategories'] = $this->Categories_model->getCategoriesList();
+
 					$this->load->view('templates/header_admin');
-					$this->load->view('categories/categories_ajout');
+					$this->load->view('categories/afficher_categories', $data);
 				}
 			}
 		}
@@ -29,24 +31,23 @@ class Categories extends CI_Controller {
 		
 		public function ajoutCategorie()
 		{
-			$this->form_validation->set_rules('nomCategorie', 'Nom de la categorie', 'required|callback_nomCategorieDisponible');
+			if($this->session->userdata('numEtudiant')=="admin") {
+				$this->form_validation->set_rules('nomCategorie', 'Nom de la categorie', 'required|callback_nomCategorieDisponible');
 				
-			if ($this->form_validation->run() === FALSE)
-			{
-				$this->load->view('templates/deconnexion');
-				$this->load->view('templates/header_admin');
-				$this->load->view('categories/categories_ajout');
-			}
-			else
-			{
-				$this->Categories_model->ajoutCategorie();
-				$this->load->view('templates/deconnexion');
-				$this->load->view('templates/header_admin');
-				$this->load->view('categories/categories_ajout');
-				echo "<script>alert(\"Categorie ajoutee avec succes\")</script>";
-			
-			}
-			
+				if ($this->form_validation->run() === FALSE)
+				{
+					$this->load->view('templates/deconnexion');
+					$this->load->view('templates/header_admin');
+					$this->load->view('categories/categories_ajout');
+				}
+				else
+				{
+					$this->Categories_model->ajoutCategorie();
+					echo "<script>alert(\"Categorie ajoutee avec succes\")</script>";
+					redirect('Categories', 'refresh');
+						
+				}
+			}	
 		}
 		
 		public function nomCategorieDisponible()
@@ -60,14 +61,12 @@ class Categories extends CI_Controller {
 			}
 		}
 		
-		public function afficherCategories(){
-			//$listCategories = $this->Categories_model->getCategoriesList();
-			//$this->load->view('categories/afficher_categories', $listCategories);
+		
+		public function supprimerCategorie() {
+			if($this->session->userdata('numEtudiant')=="admin") {
+				$this->Categories_model->supprimerCategorie();
+				redirect("Categories");
+			}
 			
-			$data['listCategories'] = $this->Categories_model->getCategoriesList();
-			//$data['todo_list'] = array('Clean House', 'Call Mom', 'Run Errands');
-			$this->load->view('templates/deconnexion');
-			$this->load->view('templates/header_admin');
-			$this->load->view('categories/afficher_categories', $data);
 		}
 }

@@ -26,4 +26,8 @@ class Categories_model extends CI_Model {
         	return($query->result_array());
         }
         
+        public function supprimerCategorie() {
+        	$sql = "DELETE FROM  categorie WHERE NumCategorie = ?";
+        	$query = $this->db->query($sql, array($this->input->post('NumCategorie')));
+        }
 }
