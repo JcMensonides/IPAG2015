@@ -30,4 +30,9 @@ class Categories_model extends CI_Model {
         	$sql = "DELETE FROM  categorie WHERE NumCategorie = ?";
         	$query = $this->db->query($sql, array($this->input->post('NumCategorie')));
         }
+        
+        public function updateCategorie() {
+        	$sql = "UPDATE categorie SET LibelleCategorie = ? WHERE NumCategorie = ?";
+        	$query = $this->db->query($sql, array($this->input->post('nomCategorie'),$this->input->post('NumCategorie')));
+        }
 }

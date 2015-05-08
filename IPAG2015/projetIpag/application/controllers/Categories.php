@@ -69,4 +69,34 @@ class Categories extends CI_Controller {
 			}
 			
 		}
+		
+		public function modifierCategorie() {
+			if($this->session->userdata('numEtudiant')=="admin") {
+				
+				$data['NumCategorie'] = $this->input->post('NumCategorie');
+				$data['ancienNomCategorie'] = $this->input->post('ancienNomCategorie');
+				
+				$this->load->view('templates/deconnexion');
+				$this->load->view('templates/header_admin');
+				$this->load->view('categories/categories_update', $data);
+			}
+		}
+		
+		public function updateCategorie() {
+			if($this->session->userdata('numEtudiant')=="admin") {
+				$this->form_validation->set_rules('nomCategorie', 'Nom de la categorie', 'required|callback_nomCategorieDisponible');
+			
+				if ($this->form_validation->run() === FALSE)
+				{
+					$this->modifierCategorie();
+				}
+				else
+				{
+					$this->Categories_model->updateCategorie();
+					echo "<script>alert(\"Categorie modifiée avec succès\")</script>";
+					redirect('Categories', 'refresh');
+			
+				}
+			}
+		}
 }

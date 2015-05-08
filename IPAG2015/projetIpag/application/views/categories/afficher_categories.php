@@ -13,7 +13,11 @@
                     </li>
                     
                     <li class="plan-action">
-                    <form id="<?php echo $uneCategorie['LibelleCategorie'];?>" method="post" action="<?php base_url();?>index.php/Categories/updateCategory"> <input type="hidden" name="<?php echo $uneCategorie['LibelleCategorie'];?>"/> <a class="btn btn-danger btn-lg" href="#" onclick="document.<?php echo $uneCategorie['LibelleCategorie'];?>.submit();">Modifier </a> </form>
+                    	<?php echo form_open('Categories/modifierCategorie') ?>
+                    		<input type="hidden" name=NumCategorie value="<?php echo $uneCategorie['NumCategorie'];?>"/>
+                    		<input type="hidden" name=ancienNomCategorie value="<?php echo $uneCategorie['LibelleCategorie'];?>"/>		
+					    	<input class="btn btn-danger btn-lg" type="submit" name="modifierCategorie" value="Modifier" />
+						</form>
                     </li>
                     <li class="plan-action">
                     	<?php echo form_open('Categories/supprimerCategorie') ?>
