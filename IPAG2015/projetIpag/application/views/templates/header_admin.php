@@ -49,8 +49,8 @@
    </li>
    <li class='active has-sub'><a href='#'><span>Themes de concours</span></a>
       <ul>
-         <li class='last'><a href='#'><span>Consulter thems existants</span></a></li>
-         <li class='last'><a href='#'><span>Creer un nouveau theme</span></a></li>
+         <li class='last'><a href='<?php echo base_url();?>index.php/Themes'><span>Consulter les themes existants</span></a></li>
+         <li class='last'><a href='<?php echo base_url();?>index.php/Themes/ajoutTheme'><span>Creer un nouveau theme</span></a></li>
       </ul>
    </li>
    <li class='active has-sub'><a href='#'><span>Categories de concours</span></a>

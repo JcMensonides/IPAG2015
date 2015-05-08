@@ -12,7 +12,7 @@ body {
 }
 .flat .plan li {
   padding: 10px 15px;
-  color: #ccc;
+  color: #333;
   border-top: 1px solid #f5f5f5;
   -webkit-transition: 300ms;
   transition: 300ms;
