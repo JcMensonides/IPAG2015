@@ -43,8 +43,8 @@
    </li>
    <li class='active has-sub'><a href='#'><span>Concours</span></a>
       <ul>
-         <li class='last'><a href='#'><span>Consulter les concours existants</span></a></li>
-         <li class='last'><a href='#'><span>Creer un nouveau concours</span></a></li>
+         <li class='last'><a href='<?php echo base_url();?>index.php/Concours'><span>Consulter les concours existants</span></a></li>
+         <li class='last'><a href='<?php echo base_url();?>index.php/Concours/ajoutConcours'><span>Creer un nouveau concours</span></a></li>
       </ul>
    </li>
    <li class='active has-sub'><a href='#'><span>Themes de concours</span></a>
