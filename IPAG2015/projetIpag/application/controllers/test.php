@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 class Test extends CI_Controller
 {
     public function index()
