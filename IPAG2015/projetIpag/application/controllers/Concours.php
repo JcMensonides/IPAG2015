@@ -81,10 +81,16 @@ class Concours extends CI_Controller {
 				
 				$data['NumConcours'] = $this->input->post('NumConcours');
 				$data['ancienNomConcours'] = $this->input->post('ancienNomConcours');
+				$data['listThemes'] = $this->Themes_model->getThemesList();
+				$data['listCategories'] = $this->Categories_model->getCategoriesList();
+				$data['ceConcoursTheme']= $this->Concours_model->getConcoursTheme();
+				$data['ceConcoursCategorie']= $this->Concours_model->getConcoursCategorie();
+				
 				
 				$this->load->view('templates/deconnexion');
 				$this->load->view('templates/header_admin');
 				$this->load->view('concours/concours_update', $data);
+			
 			}
 		}
 		

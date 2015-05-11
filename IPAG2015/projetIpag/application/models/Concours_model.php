@@ -37,8 +37,15 @@ class Concours_model extends CI_Model {
         
         public function nomConcoursDisponible()
         {
-        	$sql = "SELECT LibelleConcours FROM concours WHERE LibelleConcours = ?";
-        	$query = $this->db->query($sql, array($this->input->post('nomConcours')));
+        	if(isset($_POST['NumConcours'])) {
+        		$sql = "SELECT LibelleConcours FROM concours WHERE LibelleConcours = ? AND NumConcours <> ?";
+        		$query = $this->db->query($sql, array($this->input->post('nomConcours'), $this->input->post('NumConcours')));
+        	}
+        	else{
+        		$sql = "SELECT LibelleConcours FROM concours WHERE LibelleConcours = ?";
+        		$query = $this->db->query($sql, array($this->input->post('nomConcours')));
+        	}
+        	
         
         	return(empty($query->result()));
         }
@@ -56,7 +63,44 @@ class Concours_model extends CI_Model {
         }
         
         public function updateConcours() {
-        	$sql = "UPDATE concours SET LibelleConcours = ? WHERE NumConcours = ?";
-        	$query = $this->db->query($sql, array($this->input->post('nomConcours'),$this->input->post('NumConcours')));
+        	
+        	if(($this->input->post('numTheme'))) {
+        		$numTheme = $this->input->post('numTheme');
+        	}
+        	else
+        	{
+        		$numTheme = null;
+        	}
+        	 
+        	if(($this->input->post('numCategorie'))) {
+        		$numCategorie = $this->input->post('numCategorie');
+        	}
+        	else
+        	{
+        		$numCategorie = null;
+        	}
+        	 
+        	$data = array(
+        			'LibelleConcours' => $this->input->post('nomConcours'),
+        			'NumTheme' => $numTheme,
+        			'NumCategorie' => $numCategorie,
+        	);
+        	
+        	$this->db->where('NumConcours', $this->input->post('NumConcours'));
+        	$this->db->update('concours', $data);
+        }
+        
+        public function getConcoursTheme() {
+        	$sql = "SELECT NumTheme FROM concours WHERE NumConcours = ?";
+        	$query = $this->db->query($sql, array($this->input->post('NumConcours')));
+        	 
+        	return($query->result_array());
+        }
+        
+        public function getConcoursCategorie() {
+        	$sql = "SELECT NumCategorie FROM concours WHERE NumConcours = ?";
+        	$query = $this->db->query($sql, array($this->input->post('NumConcours')));
+        
+        	return($query->result_array());
         }
 }
