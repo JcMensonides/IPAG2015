@@ -16,8 +16,8 @@
 					<?php echo form_open('Concours/ajoutConcours') ?>
 						<li>
 							<strong> Categorie du concours </strong> <br/>
-							 <select>
-							 		<option value="null"></option>
+							 <select name = numCategorie>
+							 		<option></option>
 							 		<?php foreach($listCategories as $uneCategorie) { ?>
 							 			<option value="<?php echo $uneCategorie['NumCategorie'];?>"><?php echo $uneCategorie['LibelleCategorie'];?></option>
 							 		<?php }?>
@@ -25,8 +25,8 @@
 						</li>
 						<li>
 							<strong> Theme du concours </strong> <br/>
-							 <select>
-							 		<option value="null"></option>
+							 <select name = numTheme>
+							 		<option></option>
 							 		<?php foreach($listThemes as $unTheme) { ?>
 							 			<option value="<?php echo $unTheme['NumTheme'];?>"><?php echo $unTheme['LibelleTheme'];?></option>
 							 		<?php }?>

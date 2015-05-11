@@ -1,12 +1,31 @@
 
-
-<div class="container">
-
-        <h1 class="page-header">Concours</h1>
-		<div class="row flat">
+<?php $previous_LibTheme = false;
+		$first_run = true;
+		$i = 1;
 		
-			<?php foreach($listConcours as $unConcours) { ?>
-            <div class="col-lg-3 col-md-3 col-xs-6">
+	foreach ($listConcours as $unConcours){
+		if($previous_LibTheme !== $unConcours['LibelleTheme']) { 
+			if(!$first_run) { ?>
+				</div>
+				</div>
+			<?php 
+				$first_run = false;}
+			else { ?>
+			</div>
+				</div>
+				<?php }?>
+				
+			<div class="container">		
+						
+				<h1 class="themeButton" onclick="toggle_visibility('<?php echo $i; ?>');"><?php if($unConcours['LibelleTheme'] == null) {
+				echo "Sans theme";}
+				else {
+					echo $unConcours['LibelleTheme'];}?></h1>
+				<div class="row flat" style = "display: none" id="<?php echo $i; ?>">
+				<?php $previous_LibTheme = $unConcours['LibelleTheme'];
+		 } ?>
+		
+		<div class="col-lg-3 col-md-3 col-xs-6">
                 <ul class="plan plan1">
                     <li class="plan-name">
                         <?php echo $unConcours['LibelleConcours'] ?>
@@ -28,7 +47,25 @@
                     
                 </ul>
             </div>
-            <?php }?>
 
-		</div>
-</div>
+		
+		
+	<?php $i++;} ?>
+	
+	<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+       
+       
+
+
+
+

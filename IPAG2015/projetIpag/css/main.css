@@ -55,3 +55,19 @@ body {
   margin-top: 100px;
   padding-bottom: 30px;
 }
+
+.themeButton {
+  font-family: arial;
+  color: #FFFFFF !important;
+  font-size: 18px;
+  box-shadow: 1px 1px 1px #BEE2F9;
+  padding: 13px 40px;
+  -moz-border-radius: 24px;
+  -webkit-border-radius: 24px;
+  border-radius: 24px;
+  background: #E7933E;
+}
+.themeButton:hover {
+  color: #FFFFFF !important;
+  background: #2B2F3A;
+}

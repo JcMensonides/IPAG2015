@@ -7,8 +7,32 @@ class Concours_model extends CI_Model {
         }
         
         public function ajoutConcours(){
-        	$sql = "INSERT INTO concours (LibelleConcours) VALUES (?)";
-        	$query = $this->db->query($sql, array($this->input->post('nomConcours')));
+        	
+        	
+        	if(($this->input->post('numTheme'))) {
+        		$numTheme = $this->input->post('numTheme');
+        	}
+        	else
+        	{
+        		$numTheme = null;
+        	}
+        	
+        	if(($this->input->post('numCategorie'))) {
+        		$numCategorie = $this->input->post('numCategorie');
+        	}
+        	else
+        	{
+        		$numCategorie = null;
+        	}
+        	
+        	$data = array(
+        			'LibelleConcours' => $this->input->post('nomConcours'),
+        			'NumTheme' => $numTheme,
+        			'NumCategorie' => $numCategorie,
+        	);
+        			
+        	
+        	$this->db->insert('concours', $data);
         }
         
         public function nomConcoursDisponible()
@@ -20,7 +44,7 @@ class Concours_model extends CI_Model {
         }
         
         public function getConcoursList() {
-        	$sql = "SELECT NumConcours, LibelleConcours FROM concours";
+        	$sql = "SELECT NumConcours, LibelleConcours, LibelleTheme, LibelleCategorie FROM concours LEFT JOIN Theme ON concours.NumTheme=Theme.NumTheme LEFT JOIN categorie ON concours.NumCategorie=Categorie.NumCategorie ORDER BY LibelleTheme, LibelleCategorie";
         	$query = $this->db->query($sql);
         	
         	return($query->result_array());
