@@ -41,13 +41,13 @@
 				
 				</select></li>
 				<li><strong> Dates d'inscriptions </strong> <br /> <br /> <label>Du
-				</label> <input type="date" placeholder="JJ/MM/AAAA"
+				</label> <input type="date" placeholder="AAAA/MM/JJ"
 					name="dateDebutInscriptionEditionConcours"> <label> au (*)</label>
-					<input type="date" placeholder="JJ/MM/AAAA"
+					<input type="date" placeholder="AAAA/MM/JJ"
 					name="dateFinInscriptionEditionConcours"></li>
 
 				<li><strong> Date de resultats du concours(*) </strong> <br /> <input
-					type="date" placeholder="JJ/MM/AAAA"
+					type="date" placeholder="AAAA/MM/JJ"
 					name="dateResultatsEditionConcours"></li>
 
 
@@ -73,7 +73,7 @@
 							onclick="toggle_visibility('addQCM');">X</div>
 						<br /> <label> Date du QCM</label> <br /> <input type="date"
 							class="addQCMDeleteClass" name="DateQCM" /> <br /> <br /> <label>
-							Date de resultat du QCM</label> <br /> <input type="date"
+							Date de resultat du QCM (*)</label> <br /> <input type="date"
 							class="addQCMDeleteClass" name="DateResultatQCM" />
 					</div>
 				</li>
@@ -81,7 +81,7 @@
 		</div>
 
 
-		<div style="padding: 3px; width =: 24%"
+<div style="padding: 3px; width =: 24%"
 			class="col-lg-3 col-md-3 col-xs-6">
 			<ul class="plan plan1">
 				<li class="plan-name">Epreuves ecrites</li>
@@ -99,10 +99,10 @@
 							onclick="toggle_visibility('addEpreuveEcrite'); delete_all_matieres_ecrites();">X</div>
 						<br /> <label> Du</label> <input type="date"
 							class="addEpreuveEcriteDeleteClass" name="DateEpreuveEcrite" /> <br />
-						<label> au (*)</label> <input type="date"
+						<label> au</label> <input type="date"
 							class="addEpreuveEcriteDeleteClass"
 							name="DateResultatEpreuveEcrite" /> <br /> <br /> <label> Date de
-							resultat des epreuves ecrites</label> <input type="date"
+							resultat des epreuves ecrites (*)</label> <input type="date"
 							class="addEpreuveEcriteDeleteClass"
 							name="DateResultatEpreuveEcrite" /> <br /> <br />
 							
@@ -111,13 +111,13 @@
 							<div id="addMatiereEcrite" style="display: block">
 							<div>
 								<label> Matieres Ecrites</label> <label
-									class="Ajout-round-button" id = "addMatiereButton"
+									class="Ajout-round-button" id = "addMatiereEcriteButton"
 									onclick="add_matiere_ecrite('nouvelleMatiereEcrite')"> + </label>
 							</div>
 						</div>
 						<div id="nouvelleMatiereEcrite"></div>
 						<div id="addMatiereEcriteDelete">
-						<div class="Delete-round-button" id= "deleteMatiereButton" style= "display:none"
+						<div class="Delete-round-button" id= "deleteMatiereEcriteButton" style= "display:none"
 							onclick="delete_matiere_ecrite();">X</div>
 						</div>
 						
@@ -130,8 +130,8 @@
 		nbMatiereEcrite= 0;
 	function add_matiere_ecrite(id) {
 		nbMatiereEcrite++;
-		var deleteMatiereButton = document.getElementById("deleteMatiereButton");
-		deleteMatiereButton.style.display='block';
+		var deleteMatiereEcriteButton = document.getElementById("deleteMatiereEcriteButton");
+		deleteMatiereEcriteButton.style.display='block';
 		
 		var element = document.getElementById(id);
 		var matiereLabel = document.createElement("label");
@@ -157,8 +157,8 @@
 			nbMatiereEcrite --;
 		}
 		if(nbMatiereEcrite == 0) {
-			var deleteMatiereButton = document.getElementById("deleteMatiereButton");
-			deleteMatiereButton.style.display='none';
+			var deleteMatiereEcriteButton = document.getElementById("deleteMatiereEcriteButton");
+			deleteMatiereEcriteButton.style.display='none';
 		}
 	}
 
@@ -171,8 +171,8 @@
 			parent.removeChild(labelADelete);
 			nbMatiereEcrite --;
 		}
-		var deleteMatiereButton = document.getElementById("deleteMatiereButton");
-		deleteMatiereButton.style.display='none';
+		var deleteMatiereEcriteButton = document.getElementById("deleteMatiereEcriteButton");
+		deleteMatiereEcriteButton.style.display='none';
 	}
 	
 		
@@ -196,10 +196,10 @@
 							onclick="toggle_visibility('addEpreuveOrale'); delete_all_matieres_orales();">X</div>
 						<br /> <label> Du</label> <input type="date"
 							class="addEpreuveOraleDeleteClass" name="DateEpreuveOrale" /> <br />
-						<label> au (*)</label> <input type="date"
+						<label> au</label> <input type="date"
 							class="addEpreuveOraleDeleteClass"
 							name="DateResultatEpreuveOrale" /> <br /> <br /> <label> Date de
-							resultat des epreuves orales</label> <input type="date"
+							resultat des epreuves orales (*)</label> <input type="date"
 							class="addEpreuveOraleDeleteClass"
 							name="DateResultatEpreuveOrale" /> <br /> <br />
 							
@@ -208,13 +208,13 @@
 							<div id="addMatiereOrale" style="display: block">
 							<div>
 								<label> Matieres Orales</label> <label
-									class="Ajout-round-button" id = "addMatiereButton"
+									class="Ajout-round-button" id = "addMatiereOraleButton"
 									onclick="add_matiere_orale('nouvelleMatiereOrale')"> + </label>
 							</div>
 						</div>
 						<div id="nouvelleMatiereOrale"></div>
 						<div id="addMatiereOraleDelete">
-						<div class="Delete-round-button" id= "deleteMatiereButton" style= "display:none"
+						<div class="Delete-round-button" id= "deleteMatiereOraleButton" style= "display:none"
 							onclick="delete_matiere_orale();">X</div>
 						</div>
 						
@@ -227,8 +227,8 @@
 		nbMatiereOrale= 0;
 	function add_matiere_orale(id) {
 		nbMatiereOrale++;
-		var deleteMatiereButton = document.getElementById("deleteMatiereButton");
-		deleteMatiereButton.style.display='block';
+		var deleteMatiereOraleButton = document.getElementById("deleteMatiereOraleButton");
+		deleteMatiereOraleButton.style.display='block';
 		
 		var element = document.getElementById(id);
 		var matiereLabel = document.createElement("label");
@@ -254,8 +254,8 @@
 			nbMatiereOrale --;
 		}
 		if(nbMatiereOrale == 0) {
-			var deleteMatiereButton = document.getElementById("deleteMatiereButton");
-			deleteMatiereButton.style.display='none';
+			var deleteMatiereOraleButton = document.getElementById("deleteMatiereOraleButton");
+			deleteMatiereOraleButton.style.display='none';
 		}
 	}
 
@@ -268,8 +268,8 @@
 			parent.removeChild(labelADelete);
 			nbMatiereOrale --;
 		}
-		var deleteMatiereButton = document.getElementById("deleteMatiereButton");
-		deleteMatiereButton.style.display='none';
+		var deleteMatiereOraleButton = document.getElementById("deleteMatiereOraleButton");
+		deleteMatiereOraleButton.style.display='none';
 	}
 	
 		
@@ -280,69 +280,43 @@
 		<div style="padding: 3px; width =: 24%"
 			class="col-lg-3 col-md-3 col-xs-6">
 			<ul class="plan plan1">
-				<li class="plan-name">Nouvelle edition</li>
+				<li class="plan-name">Epreuves Speciales</li>
 
 				<li class="plan-action">
-                   
-						
-				
-				
-				
-				
-				
-				
-				
-				<li><strong> Concours </strong> <br /> <select name=numConcours>
-							 		<?php
-										
-										$previous_libTheme = false;
-										foreach ( $listConcours as $unConcours ) {
-											if ($unConcours ['LibelleTheme'] !== $previous_libTheme) {
-												?>
-								 			<optgroup label="<?php echo $unConcours['LibelleTheme'];?>">
-								 			<?php
-												
-												$previous_libTheme = $unConcours ['LibelleTheme'];
-											}
-											?> </optgroup>
-							 			<option value="<?php echo $unConcours['NumConcours'];?>"><?php echo $unConcours['LibelleConcours'];?></option>
-							 		<?php }?>
-							
-				
-				
-				
-				
-				
-				
-				
-				</select></li>
-				<li><strong> Dates d'inscriptions </strong> <br /> <br /> <label>Du
-				</label> <input type="date" placeholder="JJ/MM/AAAA"
-					name="dateDebutInscriptionEditionConcours"> <label> au (*)</label>
-					<input type="date" placeholder="JJ/MM/AAAA"
-					name="dateFinInscriptionEditionConcours"></li>
-
-				<li><strong> Date de resultats du concours(*) </strong> <br /> <input
-					type="date" placeholder="JJ/MM/AAAA"
-					name="dateResultatsEditionConcours"></li>
-				<li><strong>QCM</strong> <br />
-					<div id="addQCM" style="display: block">
+					<div id="addEpreuvePhysique" style="display: block">
 						<div>
-							<label class="Ajout-round-button"
-								onclick="toggle_visibility('addQCM');"> + </label>
+							<label>Pas de test physique</label> <br /> <label
+								class="Ajout-round-button"
+								onclick="toggle_visibility('addEpreuvePhysique');"> + </label>
 						</div>
 					</div>
-					<div id="addQCMDelete" style="display: none">
+					<div id="addEpreuvePhysiqueDelete" style="display: none">
 						<div class="Delete-round-button"
-							onclick="toggle_visibility('addQCM');">X</div>
-						<br /> <label> Date du QCM</label> <input type="date"
-							class="cachable" name="DateQCM" /> <label> Date Resultat du QCM</label>
-						<input type="date" class="cachable" name="DateResultatQCM" />
+							onclick="toggle_visibility('addEpreuvePhysique');">X</div>
+						<br /> <label> Date du test physique</label> <br /> <input type="date"
+							class="addEpreuvePhysiqueDeleteClass" name="DateEpreuvePhysique" /> <br /> <br /> <label>
+							Date de resultat du test physique (*)</label> <br /> <input type="date"
+							class="addEpreuvePhysiqueDeleteClass" name="DateResultatEpreuvePhysique" />
 					</div>
-					<div></div></li>
+				</li>
 				
-
-
+				<li>
+					<div id="addEpreuvePsychoTechnique" style="display: block">
+							<div>
+								<label>Pas de test psychotechnique</label> <br /> <label
+									class="Ajout-round-button"
+									onclick="toggle_visibility('addEpreuvePsychoTechnique');"> + </label>
+							</div>
+						</div>
+						<div id="addEpreuvePsychoTechniqueDelete" style="display: none">
+							<div class="Delete-round-button"
+								onclick="toggle_visibility('addEpreuvePsychoTechnique');">X</div>
+							<br /> <label> Date du test psychotechnique</label> <br /> <input type="date"
+								class="addEpreuvePsychoTechniqueDeleteClass" name="DateEpreuvePsychoTechnique" /> <br /> <br /> <label>
+								Date de resultat du test psychotechnique (*)</label> <br /> <input type="date"
+								class="addEpreuvePsychoTechniqueDeleteClass" name="DateResultatEpreuvePsychoTechnique" />
+						</div>
+					</li>
 			</ul>
 		</div>
 
@@ -382,48 +356,4 @@
        }
     }
 //-->
-</script>
-
-
-
-
-
-<div class="formulairePopUp" id="abc">
-	<!-- Popup Div Starts Here -->
-	<div id="popupContact">
-		<!-- Contact Us Form -->
-		<form action="#" id="form" method="post" name="form">
-			<img id="close" src="images/3.png" onclick="div_hide()">
-			<h2>Contact Us</h2>
-			<hr>
-			<input id="name" name="name" placeholder="Name" type="text"> <input
-				id="email" name="email" placeholder="Email" type="text">
-			<textarea id="msg" name="message" placeholder="Message"></textarea>
-			<a href="javascript:%20check_empty()" id="submit">Send</a>
-		</form>
-	</div>
-	<!-- Popup Div Ends Here -->
-</div>
-<!-- Display Popup Button -->
-<h1>Click Button To Popup Form Using Javascript</h1>
-<button class="formulairePopUp" id="popup" onclick="div_show()">Popup</button>
-
-<script>
-// Validating Empty Field
-function check_empty() {
-if (document.getElementById('name').value == "" || document.getElementById('email').value == "" || document.getElementById('msg').value == "") {
-alert("Fill All Fields !");
-} else {
-document.getElementById('form').submit();
-alert("Form Submitted Successfully...");
-}
-}
-//Function To Display Popup
-function div_show() {
-document.getElementById('abc').style.display = "block";
-}
-//Function to Hide Popup
-function div_hide(){
-document.getElementById('abc').style.display = "none";
-}
 </script>

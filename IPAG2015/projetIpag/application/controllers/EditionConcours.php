@@ -41,16 +41,12 @@ class EditionConcours extends CI_Controller {
 				
 				if ($this->form_validation->run() === FALSE)
 				{
-					//old
-					$data['listThemes'] = $this->Themes_model->getThemesList();
-					$data['listCategories'] = $this->Categories_model->getCategoriesList();
-					
-					//new
 					$data['listConcours'] = $this->Concours_model->getConcoursList();
 					
 					$this->load->view('templates/deconnexion');
 					$this->load->view('templates/header_admin');
 					$this->load->view('EditionConcours/ajout_EditionConcours', $data);
+					echo $this->input->post('dateResultatsEditionConcours');
 				}
 				else
 				{
