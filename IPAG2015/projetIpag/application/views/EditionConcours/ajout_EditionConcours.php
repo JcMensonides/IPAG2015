@@ -41,13 +41,13 @@
 				
 				</select></li>
 				<li><strong> Dates d'inscriptions </strong> <br /> <br /> <label>Du
-				</label> <input type="date" placeholder="AAAA/MM/JJ"
+				</label> <input type="date" placeholder="AAAA-MM-JJ"
 					name="dateDebutInscriptionEditionConcours"> <label> au (*)</label>
-					<input type="date" placeholder="AAAA/MM/JJ"
+					<input type="date" placeholder="AAAA-MM-JJ"
 					name="dateFinInscriptionEditionConcours"></li>
 
 				<li><strong> Date de resultats du concours(*) </strong> <br /> <input
-					type="date" placeholder="AAAA/MM/JJ"
+					type="date" placeholder="AAAA-MM-JJ"
 					name="dateResultatsEditionConcours"></li>
 
 

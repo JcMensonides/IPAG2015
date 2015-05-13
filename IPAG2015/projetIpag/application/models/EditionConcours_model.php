@@ -7,32 +7,21 @@ class EditionConcours_model extends CI_Model {
         }
         
         public function ajoutEditionConcours(){
-        	
-        	
-        	if(($this->input->post('numTheme'))) {
-        		$numTheme = $this->input->post('numTheme');
+        	if($this->input->post('dateDebutInscriptionEditionConcours') !== ""){
+        		$dateDebutInscriptionEditionConcours = $this->input->post('dateDebutInscriptionEditionConcours');
         	}
-        	else
-        	{
-        		$numTheme = null;
+        	else{
+        		$dateDebutInscriptionEditionConcours = null;
         	}
-        	
-        	if(($this->input->post('numCategorie'))) {
-        		$numCategorie = $this->input->post('numCategorie');
-        	}
-        	else
-        	{
-        		$numCategorie = null;
-        	}
-        	
         	$data = array(
-        			'LibelleEditionConcours' => $this->input->post('nomEditionConcours'),
-        			'NumTheme' => $numTheme,
-        			'NumCategorie' => $numCategorie,
+        			'NumConcours' =>  $this->input->post('numConcours'),
+        			'dateDebutInscriptionEditionConcours' => $dateDebutInscriptionEditionConcours,
+        			'dateFinInscriptionEditionConcours' => $this->input->post('dateFinInscriptionEditionConcours'),
+        			'dateResultatsEditionConcours' => $this->input->post('dateResultatsEditionConcours'),
         	);
         			
         	
-        	$this->db->insert('concours', $data);
+        	$this->db->insert('editionconcours', $data);
         }
         
         public function nomEditionConcoursDisponible()

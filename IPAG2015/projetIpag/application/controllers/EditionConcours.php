@@ -34,29 +34,9 @@ class EditionConcours extends CI_Controller {
 		}
 
 		
-		public function ajoutEditionConcours()
-		{
-			if($this->session->userdata('numEtudiant')=="admin") {
-				$this->form_validation->set_rules('nomEditionConcours', 'Nom du concours', 'required|callback_nomEditionConcoursDisponible');
-				
-				if ($this->form_validation->run() === FALSE)
-				{
-					$data['listConcours'] = $this->Concours_model->getConcoursList();
-					
-					$this->load->view('templates/deconnexion');
-					$this->load->view('templates/header_admin');
-					$this->load->view('EditionConcours/ajout_EditionConcours', $data);
-					echo $this->input->post('dateResultatsEditionConcours');
-				}
-				else
-				{
-					$this->EditionConcours_model->ajoutEditionConcours();
-					echo "<script>alert(\"EditionConcours ajoute avec succes\")</script>";
-					redirect('EditionConcours', 'refresh');
-						
-				}
-			}	
-		}
+		
+		
+		
 		
 		public function nomEditionConcoursDisponible()
 		{
@@ -111,6 +91,74 @@ class EditionConcours extends CI_Controller {
 					redirect('EditionConcours', 'refresh');
 			
 				}
+			}
+		}
+		
+		public function validateDate( $date)
+		{
+			if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date)) {
+				list( $y, $m, $d ) = preg_split( '/[-\.\/ ]/', $date );
+				return checkdate( $m, $d, $y );
+			}
+			elseif (preg_match("/^[0-9]{4}-([1-9]|1[0-2])-([1-9]|[1-2][0-9]|3[0-1])$/",$date)) {
+				list( $y, $m, $d ) = preg_split( '/[-\.\/ ]/', $date );
+				return checkdate( $m, $d, $y );
+			}
+			else
+				return false;
+			
+		}
+		
+		public function ajoutEditionConcours()
+		{
+			if($this->session->userdata('numEtudiant')=="admin") {
+		
+				$this->form_validation->set_rules('dateFinInscriptionEditionConcours', 'Date de fin d\'inscription', 'required|callback_valider_dateInscriptionEditionConcours');
+				$this->form_validation->set_rules('dateResultatsEditionConcours', 'Date de resultat du concours', 'required|callback_valider_dateResultatsEditionConcours');
+				
+		
+				if ($this->form_validation->run() === FALSE)
+				{
+					$data['listConcours'] = $this->Concours_model->getConcoursList();
+						
+					$this->load->view('templates/deconnexion');
+					$this->load->view('templates/header_admin');
+					$this->load->view('EditionConcours/ajout_EditionConcours', $data);
+				}
+				else
+				{
+					$this->EditionConcours_model->ajoutEditionConcours();
+					redirect('EditionConcours', 'refresh');
+		
+				}
+			}
+		}
+		
+		public function valider_dateInscriptionEditionConcours() {
+			if (!$this->validateDate($this->input->post('dateFinInscriptionEditionConcours'))){
+				$this->form_validation->set_message('valider_dateInscriptionEditionConcours', 'La date de fin d\'inscription n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('dateDebutInscriptionEditionConcours') != "" && !$this->validateDate($this->input->post('dateDebutInscriptionEditionConcours'))){
+				$this->form_validation->set_message('valider_dateInscriptionEditionConcours', 'La date de de debut d\'inscription au concours n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif(strtotime($this->input->post('dateDebutInscriptionEditionConcours'))> strtotime($this->input->post('dateFinInscriptionEditionConcours'))){
+				$this->form_validation->set_message('valider_dateInscriptionEditionConcours', 'La date de de debut d\'inscription au concours doit etre inferieur a celle de fin d\'inscription.');
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		
+		public function valider_dateResultatsEditionConcours() {
+			if (!$this->validateDate($this->input->post('dateResultatsEditionConcours'))){
+				$this->form_validation->set_message('valider_dateResultatsEditionConcours', 'La date de resultat du concours n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			else{
+				return true;
 			}
 		}
 }
