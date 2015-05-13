@@ -27,17 +27,9 @@
 <ul>
    <li class='active has-sub'><a href='#'><span>Editions de concours</span></a>
       <ul>
-         <li class='has-sub'><a href='<?php echo base_url();?>index.php/EditionConcours'><span>Consulter les editions existantes</span></a>
-            <ul>
-               <li><a href='#'><span>Sub Product</span></a></li>
-               <li class='last'><a href='#'><span>Sub Product</span></a></li>
-            </ul>
+         <li class='last'><a href='<?php echo base_url();?>index.php/EditionConcours'><span>Consulter les editions existantes</span></a>
          </li>
-         <li class='has-sub'><a href='<?php echo base_url();?>index.php/EditionConcours/ajoutEditionConcours'><span>Creer une nouvelle edition</span></a>
-            <ul>
-               <li><a href='#'><span>Sub Product</span></a></li>
-               <li class='last'><a href='#'><span>Sub Product</span></a></li>
-            </ul>
+         <li class='last'><a href='<?php echo base_url();?>index.php/EditionConcours/ajoutEditionConcours'><span>Creer une nouvelle edition</span></a>
          </li>
       </ul>
    </li>
