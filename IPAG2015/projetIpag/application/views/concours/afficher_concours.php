@@ -9,11 +9,8 @@
 				</div>
 				</div>
 			<?php 
-				$first_run = false;}
-			else { ?>
-			</div>
-				</div>
-				<?php }?>
+				}
+				$first_run = false;?>
 				
 			<div class="container">		
 						

@@ -28,7 +28,7 @@ class EditionConcours extends CI_Controller {
 					$data['listEditionConcours'] = $this->EditionConcours_model->getEditionConcoursList();
 
 					$this->load->view('templates/header_admin');
-					$this->load->view('EditionConcours/afficher_concours', $data);
+					$this->load->view('EditionConcours/afficher_EditionConcours', $data);
 				}
 			}
 		}
