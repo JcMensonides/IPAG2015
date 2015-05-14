@@ -116,6 +116,30 @@ class EditionConcours extends CI_Controller {
 				$this->form_validation->set_rules('dateFinInscriptionEditionConcours', 'Date de fin d\'inscription', 'required|callback_valider_dateInscriptionEditionConcours');
 				$this->form_validation->set_rules('dateResultatsEditionConcours', 'Date de resultat du concours', 'required|callback_valider_dateResultatsEditionConcours');
 				
+				//check si on veut ajouter un QCM
+				if($this->input->post('DateResultatQCM') !== "null"){
+					$this->form_validation->set_rules('DateResultatQCM', 'Date de resultat du QCM', 'required|callback_valider_dateResultatQCM');
+				}
+				
+				//check si on veut ajouter une epreuve ecrite
+				if($this->input->post('DateResultatEpreuveEcrite') !== "null"){
+					$this->form_validation->set_rules('DateResultatEpreuveEcrite', 'Date de l\'epreuve ecrite', 'required|callback_valider_DateResultatEpreuveEcrite');
+				}
+				
+				//check si on veut ajouter une epreuve orale
+				if($this->input->post('DateResultatEpreuveOrale') !== "null"){
+					$this->form_validation->set_rules('DateResultatEpreuveOrale', 'Date de l\'epreuve orale', 'required|callback_valider_DateResultatEpreuveOrale');
+				}
+				
+				//check si on veut ajouter un test physique
+				if($this->input->post('DateResultatEpreuvePhysique') !== "null"){
+					$this->form_validation->set_rules('DateResultatEpreuvePhysique', 'Date de resultat de l\'epreuve physique', 'required|callback_valider_dateResultatEpreuvePhysique');
+				}
+				
+				//check si on veut ajouter un test psychoTechnique
+				if($this->input->post('DateResultatEpreuvePsychoTechnique') !== "null"){
+					$this->form_validation->set_rules('DateResultatEpreuvePsychoTechnique', 'Date de resultat de l\'epreuve psychoTechnique', 'required|callback_valider_dateResultatEpreuvePsychoTechnique');
+				}
 		
 				if ($this->form_validation->run() === FALSE)
 				{
@@ -155,6 +179,112 @@ class EditionConcours extends CI_Controller {
 		public function valider_dateResultatsEditionConcours() {
 			if (!$this->validateDate($this->input->post('dateResultatsEditionConcours'))){
 				$this->form_validation->set_message('valider_dateResultatsEditionConcours', 'La date de resultat du concours n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		
+		public function valider_dateResultatQCM(){
+			if (!$this->validateDate($this->input->post('DateResultatQCM'))){
+				$this->form_validation->set_message('valider_dateResultatQCM', 'La date de resultat du QCM n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('DateQCM') != "" && !$this->validateDate($this->input->post('DateQCM'))){
+				$this->form_validation->set_message('valider_dateResultatQCM', 'La date du QCM n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif(strtotime($this->input->post('DateQCM'))> strtotime($this->input->post('DateResultatQCM'))){
+				$this->form_validation->set_message('valider_dateResultatQCM', 'La date du QCM doit etre inferieur a celle du resultat du QCM.');
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		
+		public function valider_DateResultatEpreuveEcrite(){
+			if (!$this->validateDate($this->input->post('DateResultatEpreuveEcrite'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveEcrite', 'La date de resultat de l\'epreuve ecrite n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('DateDebutEpreuveEcrite') != "" && !$this->validateDate($this->input->post('DateDebutEpreuveEcrite'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveEcrite', 'La date de debut de l\'epreuve ecrite n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('DateFinEpreuveEcrite') != "" && !$this->validateDate($this->input->post('DateFinEpreuveEcrite'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveEcrite', 'La date de fin de l\'epreuve ecrite n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif(strtotime($this->input->post('DateDebutEpreuveEcrite'))> strtotime($this->input->post('DateFinEpreuveEcrite'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveEcrite', 'La date de debut de l\'epreuve ecrite doit etre inferieur a celle de fin de l\'epreuve ecrite.');
+				return false;
+			}
+			elseif(strtotime($this->input->post('DateFinEpreuveEcrite'))> strtotime($this->input->post('DateResultatEpreuveEcrite'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveEcrite', 'La date de fin de l\'epreuve ecrite doit etre inferieur a celle de resultat de l\'epreuve ecrite.');
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		
+		public function valider_DateResultatEpreuveOrale(){
+			if (!$this->validateDate($this->input->post('DateResultatEpreuveOrale'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveOrale', 'La date de resultat de l\'epreuve orale n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('DateDebutEpreuveOrale') != "" && !$this->validateDate($this->input->post('DateDebutEpreuveOrale'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveOrale', 'La date de debut de l\'epreuve orale n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('DateFinEpreuveOrale') != "" && !$this->validateDate($this->input->post('DateFinEpreuveOrale'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveOrale', 'La date de fin de l\'epreuve orale n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif(strtotime($this->input->post('DateDebutEpreuveOrale'))> strtotime($this->input->post('DateFinEpreuveOrale'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveOrale', 'La date de debut de l\'epreuve orale doit etre inferieur a celle de fin de l\'epreuve orale.');
+				return false;
+			}
+			elseif(strtotime($this->input->post('DateFinEpreuveOrale'))> strtotime($this->input->post('DateResultatEpreuveOrale'))){
+				$this->form_validation->set_message('valider_DateResultatEpreuveOrale', 'La date de fin de l\'epreuve orale doit etre inferieur a celle de resultat de l\'epreuve orale.');
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		
+		public function valider_dateResultatEpreuvePhysique(){
+			if (!$this->validateDate($this->input->post('DateResultatEpreuvePhysique'))){
+				$this->form_validation->set_message('valider_dateResultatEpreuvePhysique', 'La date de resultat de l\'epreuve physique n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('DateEpreuvePhysique') != "" && !$this->validateDate($this->input->post('DateEpreuvePhysique'))){
+				$this->form_validation->set_message('valider_dateResultatEpreuvePhysique', 'La date de l\'epreuve physique n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif(strtotime($this->input->post('DateEpreuvePhysique'))> strtotime($this->input->post('DateResultatEpreuvePhysique'))){
+				$this->form_validation->set_message('valider_dateResultatEpreuvePhysique', 'La date de l\'epreuve physique doit etre inferieur a celle du resultat de l\'epreuve physique.');
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+		
+		public function valider_dateResultatEpreuvePsychoTechnique(){
+			if (!$this->validateDate($this->input->post('DateResultatEpreuvePsychoTechnique'))){
+				$this->form_validation->set_message('valider_dateResultatEpreuvePsychoTechnique', 'La date de resultat de l\'epreuve psychoTechnique n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif ($this->input->post('DateEpreuvePsychoTechnique') != "" && !$this->validateDate($this->input->post('DateEpreuvePsychoTechnique'))){
+				$this->form_validation->set_message('valider_dateResultatEpreuvePsychoTechnique', 'La date de l\'epreuve psychoTechnique n\'est pas valide. Verifiez son format');
+				return false;
+			}
+			elseif(strtotime($this->input->post('DateEpreuvePsychoTechnique'))> strtotime($this->input->post('DateResultatEpreuvePsychoTechnique'))){
+				$this->form_validation->set_message('valider_dateResultatEpreuvePsychoTechnique', 'La date de l\'epreuve psychoTechnique doit etre inferieur a celle du resultat de l\'epreuve psychoTechnique.');
 				return false;
 			}
 			else{

@@ -7,6 +7,8 @@ class EditionConcours_model extends CI_Model {
         }
         
         public function ajoutEditionConcours(){
+        	
+        	//creation de l'edition
         	if($this->input->post('dateDebutInscriptionEditionConcours') !== ""){
         		$dateDebutInscriptionEditionConcours = $this->input->post('dateDebutInscriptionEditionConcours');
         	}
@@ -19,9 +21,163 @@ class EditionConcours_model extends CI_Model {
         			'dateFinInscriptionEditionConcours' => $this->input->post('dateFinInscriptionEditionConcours'),
         			'dateResultatsEditionConcours' => $this->input->post('dateResultatsEditionConcours'),
         	);
-        			
-        	
+        		
         	$this->db->insert('editionconcours', $data);
+        	$numEdition = $this->db->insert_id();
+        	
+        		//creation du QCM
+				if($this->input->post('DateResultatQCM') !== "null"){
+					if($this->input->post('DateQCM')== "") {
+						$DateQCM = null;
+					}
+					else{
+						$DateQCM = $this->input->post('DateQCM');
+					}
+					$QCM = array(
+							'dateQCM' => $DateQCM,
+							'dateResultatQCM' => $this->input->post('DateResultatQCM'),
+							'numEditionConcours' => $numEdition,
+					);
+					$this->db->insert('qcm', $QCM);
+					$numQCM = $this->db->insert_id();
+				}
+				else {
+					$numQCM = null;
+				}
+				
+				
+				//creation de l'epreuve ecrite
+				if($this->input->post('DateResultatEpreuveEcrite') !== "null"){
+					if($this->input->post('DateDebutEpreuveEcrite')== "") {
+						$DateDebutEpreuveEcrite = null;
+					}
+					else{
+						$DateDebutEpreuveEcrite = $this->input->post('DateEpreuveEcrite');
+					}
+					
+					if($this->input->post('DateFinEpreuveEcrite')== "") {
+						$DateFinEpreuveEcrite = null;
+					}
+					else{
+						$DateFinEpreuveEcrite = $this->input->post('DateFinEpreuveEcrite');
+					}
+					
+					
+					$EpreuveEcrite = array(
+							'dateDebutEpreuvesEcrites' => $DateDebutEpreuveEcrite,
+							'dateFinEpreuvesEcrites' => $DateFinEpreuveEcrite,
+							'dateResultatEpreuvesEcrites' => $this->input->post('DateResultatEpreuveEcrite'),
+							'numEditionConcours' => $numEdition,
+					);
+					$this->db->insert('epreuvesecrites', $EpreuveEcrite);
+					$numEpreuveEcrite = $this->db->insert_id();
+					
+					//ajout des matieres ecrites
+					$i = 1;
+					while(isset($_POST['matiereEcrite'.$i])){
+						$matiereEcrite = array(
+								'LibelleMatiere' => $this->input->post('matiereEcrite'.$i),
+								'numEpreuvesEcrites' => $numEpreuveEcrite,
+						);
+						$this->db->insert('matiere', $matiereEcrite);
+						$i++;
+					}
+				}
+				else {
+					$numEpreuveEcrite = null;
+				}
+				
+				//creation de l'epreuve orale
+				if($this->input->post('DateResultatEpreuveOrale') !== "null"){
+					if($this->input->post('DateDebutEpreuveOrale')== "") {
+						$DateDebutEpreuveOrale = null;
+					}
+					else{
+						$DateDebutEpreuveOrale = $this->input->post('DateEpreuveOrale');
+					}
+						
+					if($this->input->post('DateFinEpreuveOrale')== "") {
+						$DateFinEpreuveOrale = null;
+					}
+					else{
+						$DateFinEpreuveOrale = $this->input->post('DateFinEpreuveOrale');
+					}
+						
+						
+					$EpreuveOrale = array(
+							'dateDebutEpreuvesOrales' => $DateDebutEpreuveOrale,
+							'dateFinEpreuvesOrales' => $DateFinEpreuveOrale,
+							'dateResultatEpreuvesOrales' => $this->input->post('DateResultatEpreuveOrale'),
+							'numEditionConcours' => $numEdition,
+					);
+					$this->db->insert('epreuvesorales', $EpreuveOrale);
+					$numEpreuveOrale = $this->db->insert_id();
+					
+					//ajout des matieres orales
+					$i = 1;
+					while(isset($_POST['matiereOrale'.$i])){
+						$matiereOrale = array(
+								'LibelleMatiere' => $this->input->post('matiereOrale'.$i),
+								'numEpreuvesOrales' => $numEpreuveOrale,
+						);
+						$this->db->insert('matiere', $matiereOrale);
+						$i++;
+					}
+				}
+				else {
+					$numEpreuveOrale = null;
+				}
+				
+				//creation du test physique
+				if($this->input->post('DateResultatEpreuvePhysique') !== "null"){
+					if($this->input->post('DateEpreuvePhysique')== "") {
+						$DateEpreuvePhysique = null;
+					}
+					else{
+						$DateEpreuvePhysique = $this->input->post('DateEpreuvePhysique');
+					}
+					$EpreuvePhysique = array(
+							'dateTestsPhysiques' => $DateEpreuvePhysique,
+							'dateResultatsTestsPhysiques' => $this->input->post('DateResultatEpreuvePhysique'),
+							'numEditionConcours' => $numEdition,
+					);
+					$this->db->insert('testsphysiques', $EpreuvePhysique);
+					$numEpreuvePhysique = $this->db->insert_id();
+				}
+				else {
+					$numEpreuvePhysique = null;
+				}
+				
+				///creation du test psychotechnique
+				if($this->input->post('DateResultatEpreuvePsychoTechnique') !== "null"){
+					if($this->input->post('DateEpreuvePsychoTechnique')== "") {
+						$DateEpreuvePsychotechnique = null;
+					}
+					else{
+						$DateEpreuvePsychotechnique = $this->input->post('DateEpreuvePsychoTechnique');
+					}
+					$EpreuvePsychotechnique = array(
+							'dateTestsPsychoTechniques' => $DateEpreuvePsychotechnique,
+							'dateResultatPsychoTechniques' => $this->input->post('DateResultatEpreuvePsychoTechnique'),
+							'numEditionConcours' => $numEdition,
+					);
+					$this->db->insert('testspsychotechniques', $EpreuvePsychotechnique);
+					$numEpreuvePsychotechnique = $this->db->insert_id();
+				}
+				else {
+					$numEpreuvePsychotechnique = null;
+				}
+				
+				//On indique a l'edition de quelles epreuves elle dispose
+				$listNumEpreuves = array(
+						'numEpreuvesEcrites' => $numEpreuveEcrite,
+						'numEpreuvesOrales' => $numEpreuveOrale,
+						'numQCM' => $numQCM,
+						'numTestsPsychoTechniques' => $numEpreuvePsychotechnique,
+						'numTestsPhysiques' => $numEpreuvePhysique,
+				);
+				$this->db->where('numEditionConcours', $numEdition);
+				$this->db->update('editionconcours', $listNumEpreuves);
         }
         
         public function nomEditionConcoursDisponible()

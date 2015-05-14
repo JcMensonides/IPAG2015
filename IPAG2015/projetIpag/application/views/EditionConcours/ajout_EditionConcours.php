@@ -72,9 +72,9 @@
 						<div class="Delete-round-button"
 							onclick="toggle_visibility('addQCM');">X</div>
 						<br /> <label> Date du QCM</label> <br /> <input type="date"
-							class="addQCMDeleteClass" name="DateQCM" /> <br /> <br /> <label>
+							class="addQCMDeleteClass" name="DateQCM" value ="null" placeholder="AAAA-MM-JJ"/> <br /> <br /> <label>
 							Date de resultat du QCM (*)</label> <br /> <input type="date"
-							class="addQCMDeleteClass" name="DateResultatQCM" />
+							class="addQCMDeleteClass" name="DateResultatQCM" value="null" placeholder="AAAA-MM-JJ" />
 					</div>
 				</li>
 			</ul>
@@ -98,13 +98,13 @@
 						<div class="Delete-round-button"
 							onclick="toggle_visibility('addEpreuveEcrite'); delete_all_matieres_ecrites();">X</div>
 						<br /> <label> Du</label> <input type="date"
-							class="addEpreuveEcriteDeleteClass" name="DateEpreuveEcrite" /> <br />
+							class="addEpreuveEcriteDeleteClass" name="DateDebutEpreuveEcrite" value="null" placeholder="AAAA-MM-JJ" /> <br />
 						<label> au</label> <input type="date"
 							class="addEpreuveEcriteDeleteClass"
-							name="DateResultatEpreuveEcrite" /> <br /> <br /> <label> Date de
+							name="DateFinEpreuveEcrite" value="null" placeholder="AAAA-MM-JJ"/> <br /> <br /> <label> Date de
 							resultat des epreuves ecrites (*)</label> <input type="date"
 							class="addEpreuveEcriteDeleteClass"
-							name="DateResultatEpreuveEcrite" /> <br /> <br />
+							name="DateResultatEpreuveEcrite" value="null" placeholder="AAAA-MM-JJ"/> <br /> <br />
 							
 							
 							
@@ -141,6 +141,7 @@
 		var matiereInput = document.createElement("input");
 		matiereInput.setAttribute("id", "matiereEcrite" + nbMatiereEcrite);
 		matiereInput.setAttribute("placeholder", "Nom de la matiere " + nbMatiereEcrite);
+		matiereInput.setAttribute("name", "matiereEcrite" + nbMatiereEcrite);
 		
 
 		element.appendChild(matiereLabel);
@@ -195,13 +196,13 @@
 						<div class="Delete-round-button"
 							onclick="toggle_visibility('addEpreuveOrale'); delete_all_matieres_orales();">X</div>
 						<br /> <label> Du</label> <input type="date"
-							class="addEpreuveOraleDeleteClass" name="DateEpreuveOrale" /> <br />
+							class="addEpreuveOraleDeleteClass" name="DateDebutEpreuveOrale" value="null"  placeholder="AAAA-MM-JJ"/> <br />
 						<label> au</label> <input type="date"
 							class="addEpreuveOraleDeleteClass"
-							name="DateResultatEpreuveOrale" /> <br /> <br /> <label> Date de
+							name="DateFinEpreuveOrale" value="null" placeholder="AAAA-MM-JJ"/> <br /> <br /> <label> Date de
 							resultat des epreuves orales (*)</label> <input type="date"
 							class="addEpreuveOraleDeleteClass"
-							name="DateResultatEpreuveOrale" /> <br /> <br />
+							name="DateResultatEpreuveOrale" value="null" placeholder="AAAA-MM-JJ" /> <br /> <br />
 							
 							
 							
@@ -238,6 +239,7 @@
 		var matiereInput = document.createElement("input");
 		matiereInput.setAttribute("id", "matiereOrale" + nbMatiereOrale);
 		matiereInput.setAttribute("placeholder", "Nom de la matiere " + nbMatiereOrale);
+		matiereInput.setAttribute("name", "matiereOrale" + nbMatiereOrale);
 		
 
 		element.appendChild(matiereLabel);
@@ -294,9 +296,9 @@
 						<div class="Delete-round-button"
 							onclick="toggle_visibility('addEpreuvePhysique');">X</div>
 						<br /> <label> Date du test physique</label> <br /> <input type="date"
-							class="addEpreuvePhysiqueDeleteClass" name="DateEpreuvePhysique" /> <br /> <br /> <label>
+							class="addEpreuvePhysiqueDeleteClass" name="DateEpreuvePhysique" value="null" placeholder="AAAA-MM-JJ" /> <br /> <br /> <label>
 							Date de resultat du test physique (*)</label> <br /> <input type="date"
-							class="addEpreuvePhysiqueDeleteClass" name="DateResultatEpreuvePhysique" />
+							class="addEpreuvePhysiqueDeleteClass" name="DateResultatEpreuvePhysique" value="null" placeholder="AAAA-MM-JJ" />
 					</div>
 				</li>
 				
@@ -312,9 +314,9 @@
 							<div class="Delete-round-button"
 								onclick="toggle_visibility('addEpreuvePsychoTechnique');">X</div>
 							<br /> <label> Date du test psychotechnique</label> <br /> <input type="date"
-								class="addEpreuvePsychoTechniqueDeleteClass" name="DateEpreuvePsychoTechnique" /> <br /> <br /> <label>
+								class="addEpreuvePsychoTechniqueDeleteClass" name="DateEpreuvePsychoTechnique" value="null" placeholder="AAAA-MM-JJ"/> <br /> <br /> <label>
 								Date de resultat du test psychotechnique (*)</label> <br /> <input type="date"
-								class="addEpreuvePsychoTechniqueDeleteClass" name="DateResultatEpreuvePsychoTechnique" />
+								class="addEpreuvePsychoTechniqueDeleteClass" name="DateResultatEpreuvePsychoTechnique" value="null" placeholder="AAAA-MM-JJ" />
 						</div>
 					</li>
 			</ul>
@@ -341,6 +343,10 @@
        var eDelete = document.getElementById(id + 'Delete');
        if(e.style.display == 'block'){
     	   e.style.display = 'none';
+    	   var aDisplay =document.getElementsByClassName(id + 'DeleteClass');
+    	   for(var i = 0; i<aDisplay.length; i++) {
+        	   aDisplay[i].value = "";
+    	   }
     	   eDelete.style.display = 'block';
        }
        		
@@ -348,7 +354,7 @@
     	   eDelete.style.display = 'none';
     	   var aReset =document.getElementsByClassName(id + 'DeleteClass');
     	   for(var i = 0; i<aReset.length; i++) {
-        	   aReset[i].value = "";
+        	   aReset[i].value = "null";
     	   }
     	   e.style.marginLeft = 'auto';
     	   e.style.marginRight = 'auto';

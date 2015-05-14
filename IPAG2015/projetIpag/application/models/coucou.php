@@ -1,9 +1,29 @@
-public function valider_dateDebutInscriptionEditionConcours() {
-			if (!$this->validateDate($this->input->post('dateDebutInscriptionEditionConcours'))){
-				$this->form_validation->set_message('valider_dateDebutInscriptionEditionConcours', 'La date de de debut d'inscription au concours n\'est pas valide. Verifiez son format');
-				return false;
-			}
-			else{
-				return true;
-			}
-		}
+//creation de l'epreuve orale
+				if($this->input->post('DateResultatEpreuveOrale') !== "null"){
+					if($this->input->post('DateDebutEpreuveOrale')== "") {
+						$DateDebutEpreuveOrale = null;
+					}
+					else{
+						$DateDebutEpreuveOrale = $this->input->post('DateEpreuveOrale');
+					}
+					
+					if($this->input->post('DateFinEpreuveOrale')== "") {
+						$DateFinEpreuveOrale = null;
+					}
+					else{
+						$DateFinEpreuveOrale = $this->input->post('DateFinEpreuveOrale');
+					}
+					
+					
+					$EpreuveOrale = array(
+							'dateDebutEpreuvesOrales' => $DateDebutEpreuveOrale,
+							'dateFinEpreuvesOrales' => $DateFinEpreuveOrale,
+							'dateResultatEpreuvesOrales' => $this->input->post('DateResultatEpreuveOrale'),
+							'numEditionConcours' => $numEdition,
+					);
+					$this->db->insert('epreuvesorales', $EpreuveOrale);
+					$numEpreuveOrale = $this->db->insert_id();
+				}
+				else {
+					$numEpreuveOrale = null;
+				}
