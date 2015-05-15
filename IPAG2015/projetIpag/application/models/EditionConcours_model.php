@@ -196,7 +196,12 @@ class EditionConcours_model extends CI_Model {
         }
         
         public function getEditionConcoursList() {
-        	$sql = "SELECT IF(MONTH(ec.dateResultatsEditionConcours)<9, YEAR(ec.dateResultatsEditionConcours) - 1, YEAR(ec.dateResultatsEditionConcours)) AS debutAnneeScolaire, c.NumConcours, ec.NumEditionConcours, ec.dateResultatsEditionConcours, LibelleConcours, LibelleTheme, LibelleCategorie FROM concours c JOIN editionconcours ec ON c.NumConcours=ec.NumConcours LEFT JOIN Theme ON c.NumTheme=Theme.NumTheme LEFT JOIN categorie ON c.NumCategorie=Categorie.NumCategorie ORDER BY debutAnneeScolaire, LibelleTheme, ec.dateResultatsEditionConcours, LibelleCategorie";
+        	$sql = "SELECT IF(MONTH(ec.dateResultatsEditionConcours)<9, YEAR(ec.dateResultatsEditionConcours) - 1, YEAR(ec.dateResultatsEditionConcours)) AS debutAnneeScolaire, c.NumConcours, ec.NumEditionConcours, ec.dateResultatsEditionConcours, LibelleConcours, LibelleTheme, LibelleCategorie, ec.dateDebutInscriptionEditionConcours, ec.dateFinInscriptionEditionConcours, ec.numEpreuvesEcrites, ec.numEpreuvesOrales, ec.numQCM, ec.numTestsPsychoTechniques, ec.numTestsPhysiques
+					FROM concours c
+					JOIN editionconcours ec ON c.NumConcours=ec.NumConcours
+					LEFT JOIN Theme ON c.NumTheme=Theme.NumTheme
+					LEFT JOIN categorie ON c.NumCategorie=Categorie.NumCategorie
+					ORDER BY debutAnneeScolaire, LibelleTheme, ec.dateResultatsEditionConcours, LibelleCategorie";
         	$query = $this->db->query($sql);
         	
         	return($query->result_array());

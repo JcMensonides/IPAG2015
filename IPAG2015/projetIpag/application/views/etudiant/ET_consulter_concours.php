@@ -79,63 +79,9 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
 					echo "non renseigne";
 				}?>
 			</li>
-			<li>
-				<strong>QCM</strong><br/>
-				<label
-				<?php if($uneEdition['numQCM']){
-					echo "style=\"color: blue\">Oui";
-				}
-				else {
-					echo ">Non";
-				}?>
-				</label>
-			</li>
-			<li>
-				<strong>Epreuves ecrites</strong><br/>
-				<label
-				<?php if($uneEdition['numEpreuvesEcrites']){
-					echo "style=\"color: blue\">Oui";
-				}
-				else {
-					echo ">Non";
-				}?>
-				</label>
-			</li>
-			<li>
-				<strong>Epreuves Orales</strong><br/>
-				<label
-				<?php if($uneEdition['numEpreuvesOrales']){
-					echo "style=\"color: blue\">Oui";
-				}
-				else {
-					echo "Non";
-				}?>
-				</label>
-			</li>
-			<li>
-				<strong>Tests physiques</strong><br/>
-				<label
-				<?php if($uneEdition['numTestsPhysiques']){
-					echo "style=\"color: blue\">Oui";
-				}
-				else {
-					echo ">Non";
-				}?>
-				</label>
-			</li>
-			<li>
-				<strong>Tests psychotechniques</strong><br/>
-				<label
-				<?php if($uneEdition['numTestsPsychoTechniques']){
-					echo "style=\"color: blue\">Oui";
-				}
-				else {
-					echo ">Non";
-				}?>
-				</label>
-			</li>
+			
 			<li class="plan-action">
-                    	<?php echo form_open('EditionConcours/moreInfos')?>
+                    	<?php echo form_open('ET_inscription_concours/moreInfos')?>
                     		<input type="hidden" name=NumEditionConcours
 				value="<?php echo $uneEdition['NumEditionConcours'];?>" /> <input
 				class="btn btn-danger btn-lg" type="submit" name="moreInfos"
@@ -144,21 +90,11 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
 			</li>
 	
 			<li class="plan-action">
-                    	<?php echo form_open('Concours/modifierConcours')?>
-                    		<input type="hidden" name=NumConcours
-				value="<?php echo $uneEdition['NumConcours'];?>" /> <input
-				type="hidden" name=ancienNomConcours
-				value="<?php echo $uneEdition['LibelleConcours'];?>" /> <input
-				class="btn btn-danger btn-lg" type="submit" name="modifierConcours"
-				value="Modifier" />
-				</form>
-			</li>
-			<li class="plan-action">
-                    	<?php echo form_open('Concours/supprimerConcours')?>
-                    		<input type="hidden" name=NumConcours
-				value="<?php echo $uneEdition['NumConcours'];?>" /> <input
-				class="btn btn-danger btn-lg" type="submit" name="supprimerConcours"
-				value="Supprimer" />
+                    	<?php echo form_open('etudiant/ET_inscription_concours/inscription')?>
+                    		<input type="hidden" name=NumEditionConcours
+				value="<?php echo $uneEdition['NumEditionConcours'];?>" /> <input
+				class="btn btn-danger btn-lg" type="submit" name="inscription"
+				value="M'inscrire" />
 				</form>
 			</li>
 

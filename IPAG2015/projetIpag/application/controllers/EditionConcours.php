@@ -32,6 +32,15 @@ class EditionConcours extends CI_Controller {
 				}
 			}
 		}
+		
+		public function moreInfos() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data['infosEdition'] = $this->EditionConcours_model->getInfosEditionConcours();
+				$this->load->view('templates/deconnexion');
+				$this->load->view('templates/header_admin');
+				$this->load->view('EditionConcours/afficher_InfosEditionConcours', $data);
+			}
+		}
 
 		
 		

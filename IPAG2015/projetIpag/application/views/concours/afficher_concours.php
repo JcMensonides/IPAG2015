@@ -1,16 +1,16 @@
 
 <?php $previous_LibTheme = false;
-		$first_run = true;
+		$premier_theme = true;
 		$i = 1;
 		
 	foreach ($listConcours as $unConcours){
 		if($previous_LibTheme !== $unConcours['LibelleTheme']) { 
-			if(!$first_run) { ?>
+			if(!$premier_theme) { ?>
 				</div>
 				</div>
 			<?php 
 				}
-				$first_run = false;?>
+				$premier_theme = false;?>
 				
 			<div class="container">		
 						
