@@ -35,6 +35,16 @@ class ET_inscription_concours extends CI_Controller {
 				//redirect("etudiant/ET_inscription_edition_concours");
 			}
 		}
+		
+		public function moreInfos() {
+			if($this->session->userdata('numEtudiant')!=="admin"){
+				$data['infos'] = $this->ET_inscription_concours_model->getMoreInfos();
+				
+				$this->load->view('templates/deconnexion');
+				$this->load->view('templates/header_etudiant');
+				$this->load->view('etudiant/ET_consulter_concours', $data);
+			}
+		}
 }
 		
 		
