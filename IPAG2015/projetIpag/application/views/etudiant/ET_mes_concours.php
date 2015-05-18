@@ -1,12 +1,10 @@
-<h1 class="container">M'inscrire a un concours</h1>
+<h1 class="container">Mes concours</h1>
 
 <?php
 $previous_AS = false;
 $previous_LibTheme = false;
 $premiere_AS = true;
 $i = 1;
-
-
 
 foreach ( $listEditionConcours as $uneEdition ) {
 	
@@ -86,20 +84,11 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
 			</li>
 			
 			<li class="plan-action">
-                    	<?php echo form_open('etudiant/ET_inscription_concours/moreInfos')?>
+                    	<?php echo form_open('etudiant/ET_inscription_concours/renseigner')?>
                     		<input type="hidden" name=NumEditionConcours
 				value="<?php echo $uneEdition['NumEditionConcours'];?>" /> <input
 				class="btn btn-danger btn-lg" type="submit" name="moreInfos"
-				value="Plus d'infos" />
-				</form>
-			</li>
-	
-			<li class="plan-action">
-                    	<?php echo form_open('etudiant/ET_inscription_concours/inscription')?>
-                    		<input type="hidden" name=NumEditionConcours
-				value="<?php echo $uneEdition['NumEditionConcours'];?>" /> <input
-				class="btn btn-danger btn-lg" type="submit" name="inscription"
-				value="M'inscrire" />
+				value="Renseigner" />
 				</form>
 			</li>
 

@@ -26,6 +26,6 @@
 <div id='cssmenu'>
 <ul>
    <li class='last'><a href=<?php echo base_url();?>index.php/etudiant/ET_inscription_concours><span>S'inscrire a un concours</span></a>
-   <li class='last'><a href='#'><span>Mes concours</span></a></li>
+   <li class='last'><a href=<?php echo base_url();?>index.php/etudiant/ET_inscription_concours/mesConcours><span>Mes concours</span></a></li>
 </ul>
 </div>

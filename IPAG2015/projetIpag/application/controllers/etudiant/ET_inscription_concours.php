@@ -42,7 +42,28 @@ class ET_inscription_concours extends CI_Controller {
 				
 				$this->load->view('templates/deconnexion');
 				$this->load->view('templates/header_etudiant');
-				$this->load->view('etudiant/ET_consulter_concours', $data);
+				$this->load->view('etudiant/ET_more_infos', $data);
+			}
+		}
+		
+		public function mesConcours(){
+			if($this->session->userdata('numEtudiant')!=="admin"){
+				$data['listEditionConcours'] = $this->ET_inscription_concours_model->getMesConcours();
+				
+				$this->load->view('templates/deconnexion');
+				$this->load->view('templates/header_etudiant');
+				$this->load->view('etudiant/ET_mes_concours', $data);
+			}
+		}
+		
+		public function renseigner(){
+			if($this->session->userdata('numEtudiant')!=="admin"){
+			
+				$data['infos'] = $this->ET_inscription_concours_model->getResultatEdition();
+				
+				$this->load->view('templates/deconnexion');
+				$this->load->view('templates/header_etudiant');
+				$this->load->view('etudiant/ET_renseigner', $data);
 			}
 		}
 }

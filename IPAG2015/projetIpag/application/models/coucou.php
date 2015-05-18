@@ -1,1 +1,9 @@
-SELECT c.NumConcours, ec.NumEditionConcours, ec.dateResultatsEditionConcours, LibelleConcours, LibelleTheme, LibelleCategorie FROM concours c JOIN editionconcours ec ON c.NumConcours=ec.NumConcours LEFT JOIN Theme ON c.NumTheme=Theme.NumTheme LEFT JOIN categorie ON c.NumCategorie=Categorie.NumCategorie ORDER BY ec.dateResultatsEditionConcours, LibelleTheme, LibelleCategorie
+<li>
+					<strong>Resultat du TestsPhysiques</strong><br/>
+					<select name = admisTestsPsycho>
+							 		<option <?php if($infos['admisTestsPsycho'] == null || $infos['admisTestsPsycho'][0]['admisTestsPsycho']=='non renseigne') echo "selected=\"selected\"";?>>non renseigne</option>
+							 		<option <?php if($infos['admisTestsPsycho'] != null && $infos['admisTestsPsycho'][0]['admisTestsPsycho']=='admis') echo "selected=\"selected\"";?>>admis</option>
+							 		<option <?php if($infos['admisTestsPsycho'] != null && $infos['admisTestsPsycho'][0]['admisTestsPsycho']=='non admis') echo "selected=\"selected\"";?>>non admis</option>
+							 		<option <?php if($infos['admisTestsPsycho'] != null && $infos['admisTestsPsycho'][0]['admisTestsPsycho']=='abandon') echo "selected=\"selected\"";?>>abandon</option>
+					</select>
+				</li>
