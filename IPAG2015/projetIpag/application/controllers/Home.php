@@ -51,18 +51,12 @@ class Home extends CI_Controller {
 		 	}
 		 	else
 		 	{
-		 		if (!($this->Login_model->ExistNumEtudiant()))
-		 		{
-		 				
-		 		}
-		 		else {
 		 			//On genere la session etudiant
 		 			$donneesDeSession = array(
 		 					'numEtudiant' => $this->input->post('numeroEtudiant'),
 		 			);
 		 			$this->session->set_userdata($donneesDeSession);
 		 			redirect('/Home', 'refresh');
-		 		}
 		 	}
 		}
 		

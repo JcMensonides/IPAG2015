@@ -162,9 +162,11 @@ class ET_inscription_concours_model extends CI_Model {
 					left join qcm on qcm.numqcm=ec.numqcm
 					left join testsphysiques tph on tph.numtestsphysiques=ec.numtestsphysiques
 					left join testspsychotechniques tps on tps.numtestspsychotechniques=ec.numtestspsychotechniques
-        			WHERE ec.numeditionconcours= ?";
+        			WHERE ec.numEditionConcours= ?
+        			having ec.numEditionConcours IS NOT NULL";
         	
         	$query = $this->db->query($sql, array($this->input->post('NumEditionConcours')));
+        	
         	return($query->result_array());
         	
         }

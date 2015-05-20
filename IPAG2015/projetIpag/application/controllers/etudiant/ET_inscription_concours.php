@@ -40,6 +40,10 @@ class ET_inscription_concours extends CI_Controller {
 			if($this->session->userdata('numEtudiant')!=="admin"){
 				$data['infos'] = $this->ET_inscription_concours_model->getMoreInfos();
 				
+				//Sur certaines requetes, le numero d'edition est renvoye comme null, bien qu'il trouve le bon tuple
+				//Nous ne savons pas d'ou vient le probleme, nous modifions donc la valeur du numero d'edition ici, apres la requete
+				$data['infos'][0]['numEditionConcours'] = $this->input->post('NumEditionConcours');
+				
 				$this->load->view('templates/deconnexion');
 				$this->load->view('templates/header_etudiant');
 				$this->load->view('etudiant/ET_more_infos', $data);

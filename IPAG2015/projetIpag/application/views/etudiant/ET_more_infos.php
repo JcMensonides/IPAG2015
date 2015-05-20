@@ -135,7 +135,7 @@
 			</ul>
 		</div>
 		<?php }?>
-
+			
 			<?php echo form_open('etudiant/ET_inscription_concours/inscription')?>
                     		<input type="hidden" name=NumEditionConcours
 				value="<?php echo $infos[0]['numEditionConcours'];?>" /> <input style="width:100%"

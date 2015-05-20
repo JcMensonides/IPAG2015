@@ -44,7 +44,6 @@ class Categories extends CI_Controller {
 				else
 				{
 					$this->Categories_model->ajoutCategorie();
-					echo "<script>alert(\"Categorie ajoutee avec succes\")</script>";
 					redirect('Categories', 'refresh');
 						
 				}
