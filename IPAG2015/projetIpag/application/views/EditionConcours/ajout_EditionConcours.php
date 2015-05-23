@@ -225,9 +225,9 @@
 		</div>
 		
 		<script>
-		nbMatiereOrale= 0;
+		nbMatiereOrale= 0; 
 	function add_matiere_orale(id) {
-		nbMatiereOrale++;
+		nbMatiereOrale++; 
 		var deleteMatiereOraleButton = document.getElementById("deleteMatiereOraleButton");
 		deleteMatiereOraleButton.style.display='block';
 		

@@ -1,3 +1,4 @@
+<?php echo form_open('etudiant/ET_inscription_concours/updateInfos')?>
 <div class="container">
 
 	<h1 class="page-header">Renseigner mes resultats</h1>
@@ -28,6 +29,7 @@
 		</div>
 
 		<?php if ($infos['infos'][0]['numQCM'] !== null){?>
+		<input type="hidden" name="numQCM" value= <?php echo $infos['infos'][0]['numQCM'];?>>
 		<div style="padding: 3px; width =: 24%"
 			class="col-lg-3 col-md-3 col-xs-6">
 			<ul class="plan plan1">
@@ -67,6 +69,7 @@
 		<?php }?>
 		
 		<?php if ($infos['infos'][0]['numEpreuvesEcrites'] !== null){?>
+		<input type="hidden" name="numEpreuvesEcrites" value= <?php echo $infos['infos'][0]['numEpreuvesEcrites'];?>>
 		<div style="padding: 3px; width =: 24%"
 			class="col-lg-3 col-md-3 col-xs-6">
 			<ul class="plan plan1">
@@ -100,6 +103,7 @@
 					<?php $i=1;
 						foreach($infos['listMatieresEcrites'] as $uneMatiereEcrite){
 						echo $uneMatiereEcrite['libelleMatiere'];?>
+						<input type="hidden" value=<?php echo $uneMatiereEcrite['numMatiere'];?> name=ecrit<?php echo $i;?>>
 						<select name=me<?php echo $i;?>>
 							<option>non renseigne</option>
 							<?php for($j=1; $j<=20; $j++){?>
@@ -114,6 +118,7 @@
 		<?php }?>
 		
 		<?php if ($infos['infos'][0]['numEpreuvesOrales'] !== null){?>
+		<input type="hidden" name="numEpreuvesOrales" value= <?php echo $infos['infos'][0]['numEpreuvesOrales'];?>>
 		<div style="padding: 3px; width =: 24%"
 			class="col-lg-3 col-md-3 col-xs-6">
 			<ul class="plan plan1">
@@ -147,7 +152,8 @@
 					<?php $i=1;
 						foreach($infos['listMatieresOrales'] as $uneMatiereOrale){
 						echo $uneMatiereOrale['libelleMatiere'];?>
-						<select name=me<?php echo $i;?>>
+						<input type="hidden" value=<?php echo $uneMatiereOrale['numMatiere'];?> name=oral<?php echo $i;?>>
+						<select name=mo<?php echo $i;?>>
 							<option>non renseigne</option>
 							<?php for($j=1; $j<=20; $j++){?>
 										<option <?php if($uneMatiereOrale['noteMatiere']==$j) echo "selected=\"selected\"";?>><?php echo $j;?></option>
@@ -169,6 +175,7 @@
 
 				
 				<?php if ($infos['infos'][0]['numTestsPhysiques'] !== null) {?>
+				<input type="hidden" name="numTestsPhysiques" value= <?php echo $infos['infos'][0]['numTestsPhysiques'];?>>
 				<li class="plan-name">Tests physiques</li>
 				<li class="plan-action">
 				<strong>Date du test physique</strong><br/>
@@ -193,6 +200,7 @@
 				</li>
 				
 				<?php if ($infos['infos'][0]['numTestsPsychoTechniques'] !== null) {?>
+				<input type="hidden" name="numTestsPsychoTechniques" value= <?php echo $infos['infos'][0]['numTestsPsychoTechniques'];?>>
 				<li class="plan-name">Tests psychoTechniques</li>
 				<li class="plan-action">
 				<strong>Date du test psychoTechnique</strong><br/>
@@ -218,7 +226,7 @@
 		</div>
 		<?php }?>
 
-			<?php echo form_open('etudiant/ET_inscription_concours/inscription')?>
+			
                     		<input type="hidden" name=NumEditionConcours
 				value="<?php echo $infos['infos'][0]['numEditionConcours'];?>" /> <input style="width:100%"
 				class="btn btn-danger btn-lg" type="submit" name="inscription"

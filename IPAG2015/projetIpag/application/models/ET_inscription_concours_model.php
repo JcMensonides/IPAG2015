@@ -273,4 +273,94 @@ class ET_inscription_concours_model extends CI_Model {
         			'admisTestsPsycho' => $admisTestsPsycho,
         	);
         }
+        
+        public function updateInfos() {
+        		
+        	//si il y a un qcm
+        	if(isset($_POST['admisQCM'])) {
+        		$data = array(
+        				'admisQCM' => $this->input->post('admisQCM'),
+        				'noteQCM' => $this->input->post('noteQCM'),
+        		);
+        		$where = array('numQCM' => $this->input->post('numQCM'), 'numEtudiant' => $this->session->userdata('numEtudiant'));
+        		$this->db->where($where);
+        		$this->db->update('etreadmisqcm', $data);     	
+        	}
+        	
+        	//si il y a une epreuve ecrite
+        	if(isset($_POST['numEpreuvesEcrites'])) {
+        		$data = array(
+        				'admisEcrits' => $this->input->post('admisEpreuvesEcrites'),
+        		);
+        		$where = array('numEpreuvesEcrites' => $this->input->post('numEpreuvesEcrites'), 'numEtudiant' => $this->session->userdata('numEtudiant'));
+        		$this->db->where($where);
+        		$this->db->update('etreadmisecrits', $data);
+        	}
+        	//pour chaque matiere ecrite
+        	$i = 1;
+        	while(isset($_POST['me'.$i])){
+        		if($this->input->post('me'.$i) == 'non renseigne'){
+        			$noteEcrit = null;
+        		}
+        		else{
+        			$noteEcrit = $this->input->post('me'.$i);
+        		}
+        		$data = array(
+        				'noteMatiere' => $noteEcrit,
+        		);
+        		$where = array('numMatiere' => $this->input->post('ecrit'.$i), 'numEtudiant' => $this->session->userdata('numEtudiant'));
+        		$this->db->where($where);
+        		$this->db->update('noter', $data);
+        		$i++;
+        	}
+        	
+        	
+        	//si il y a une epreuve orale
+        	if(isset($_POST['numEpreuvesOrales'])) {
+        		$data = array(
+        				'admisOraux' => $this->input->post('admisEpreuvesOrales'),
+        		);
+        		$where = array('numEpreuvesOrales' => $this->input->post('numEpreuvesOrales'), 'numEtudiant' => $this->session->userdata('numEtudiant'));
+        		$this->db->where($where);
+        		$this->db->update('etreadmisoraux', $data);
+        	}
+        	//pour chaque matiere orale
+        	$i = 1;
+        	while(isset($_POST['mo'.$i])){
+        		if($this->input->post('mo'.$i) == 'non renseigne'){
+        			$noteOrale = null;
+        		}
+        		else{
+        			$noteOrale = $this->input->post('mo'.$i);
+        		}
+        		$data = array(
+        				'noteMatiere' => $noteOrale,
+        		);
+        		$where = array('numMatiere' => $this->input->post('oral'.$i), 'numEtudiant' => $this->session->userdata('numEtudiant'));
+        		$this->db->where($where);
+        		$this->db->update('noter', $data);
+        		$i++;
+        	}
+        	
+        	//si il y a un test physique
+        	if(isset($_POST['numTestsPhysiques'])) {
+        		$data = array(
+        				'admisTestsPhysiques' => $this->input->post('admisTestsPhysiques'),
+        		);
+        		$where = array('numTestsPhysiques' => $this->input->post('numTestsPhysiques'), 'numEtudiant' => $this->session->userdata('numEtudiant'));
+        		$this->db->where($where);
+        		$this->db->update('etreadmistestsphysiques', $data);
+        	}
+        	
+        	//si il y a un test psychotechnique
+        	if(isset($_POST['numTestsPsychoTechniques'])) {
+        		$data = array(
+        				'admisTestsPsycho' => $this->input->post('admisTestsPsycho'),
+        		);
+        		$where = array('numTestsPsychoTechniques' => $this->input->post('numTestsPsychoTechniques'), 'numEtudiant' => $this->session->userdata('numEtudiant'));
+        		$this->db->where($where);
+        		$this->db->update('etreadmistestspsycho', $data);
+        	}
+        	
+        }
 }

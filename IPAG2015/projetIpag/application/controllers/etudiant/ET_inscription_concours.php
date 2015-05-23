@@ -70,6 +70,14 @@ class ET_inscription_concours extends CI_Controller {
 				$this->load->view('etudiant/ET_renseigner', $data);
 			}
 		}
+		
+		public function updateInfos() {
+			if($this->session->userdata('numEtudiant')!=="admin") {
+				$this->ET_inscription_concours_model->updateInfos();
+				
+				$this->mesConcours();
+			}
+		}
 }
 		
 		
