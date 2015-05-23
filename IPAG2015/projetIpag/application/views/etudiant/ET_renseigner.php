@@ -1,3 +1,4 @@
+<?php echo validation_errors(); ?>
 <?php echo form_open('etudiant/ET_inscription_concours/updateInfos')?>
 <div class="container">
 
