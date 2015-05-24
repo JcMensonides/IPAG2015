@@ -79,7 +79,65 @@ class Statistiques extends CI_Controller {
 				
 				
 				//On rempli le fichier avec les infos generales	
-				$contenu .= $data['concours'].";".$nomCategorie.";".$nomTheme.";".$data['anneeScolaire']." - ".($data['anneeScolaire']+1).";".$presenceQCM.";".$presenceEcrits.";".$presenceOraux.";".PHP_EOL;
+				$contenu .= $data['concours'].";".$nomCategorie.";".$nomTheme.";".$data['anneeScolaire']." - ".($data['anneeScolaire']+1).";".$presenceQCM.";".$presenceEcrits.";".$presenceOraux.";".PHP_EOL.PHP_EOL.PHP_EOL;
+				
+				$contenu .="Nombre d'inscrits".";";
+				if($presenceQCM=="oui")
+					$contenu .="Nombre d'admis au QCM".";";
+				if($presenceEcrits=="oui")
+					$contenu .="Nombre d'admis aux ecrits".";";
+				if($presenceOraux)
+					$contenu .="Nombre d'admis aux oraux".";";
+				
+				if($presenceOraux=="oui")
+					$contenu .="taux d'admissibles".";";
+				$contenu .="taux d'admis".";".PHP_EOL;
+				
+				$contenu .=$data['nbInscrits'].";";
+				if($presenceQCM=="oui")
+					$contenu .=$data['nbAdmisQCM'].";";
+				if($presenceEcrits=="oui")
+					$contenu .=$data['nbAdmisEcrits'].";";
+				if($presenceOraux=="oui")
+					$contenu .=$data['nbAdmisOraux'].";";
+				
+				//admissibles
+				if($presenceOraux=="oui"){
+					if($presenceEcrits=="oui"){
+						if($data['nbInscrits'] == 0)
+							$contenu .="1";
+						else
+							$contenu .=($data['nbAdmisEcrits']/$data['nbInscrits']).";";
+					}
+					else
+						$contenu .="1";
+				}
+				
+				//taux d'admis
+				if($presenceOraux=="oui"){
+					if($data['nbInscrits'] == 0)
+						$contenu .="1";
+					else
+						$contenu .=($data['nbAdmisOraux']/$data['nbInscrits']).";";
+				}
+				elseif($presenceEcrits=="oui"){
+					if($data['nbInscrits'] == 0)
+						$contenu .="1";
+					else
+						$contenu .=($data['nbAdmisEcrits']/$data['nbInscrits']).";";
+				}
+				elseif($presenceQCM=="oui"){
+					if($data['nbInscrits'] == 0)
+						$contenu .="1";
+					else
+						$contenu .=($data['nbAdmisQCM']/$data['nbInscrits']).";";
+				}
+				else {
+					$contenu .="1";
+				}
+					
+				
+				
 				
 				$name = 'Statistiques_'.$data['concours']."_".$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
 				force_download($name, $contenu); 

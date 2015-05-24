@@ -229,7 +229,7 @@
 
 			
                     		<input type="hidden" name=NumEditionConcours
-				value="<?php echo $infos['infos'][0]['numEditionConcours'];?>" /> <input style="width:100%"
+				value="<?php echo $numEditionConcours;?>" /> <input style="width:100%"
 				class="btn btn-danger btn-lg" type="submit" name="inscription"
 				value="Confirmer mes resultats" />
 				</form>

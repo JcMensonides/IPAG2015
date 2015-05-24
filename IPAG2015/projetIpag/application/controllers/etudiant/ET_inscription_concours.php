@@ -64,6 +64,7 @@ class ET_inscription_concours extends CI_Controller {
 			if($this->session->userdata('numEtudiant')!=="admin"){
 			
 				$data['infos'] = $this->ET_inscription_concours_model->getResultatEdition();
+				$data['numEditionConcours'] = $this->input->post('NumEditionConcours');
 				
 				$this->load->view('templates/deconnexion');
 				$this->load->view('templates/header_etudiant');
