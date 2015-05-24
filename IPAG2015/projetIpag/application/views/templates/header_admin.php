@@ -51,7 +51,7 @@
          <li class='last'><a href='<?php echo base_url();?>index.php/Categories/ajoutCategorie'><span>Creer une nouvelle categorie</span></a></li>
       </ul>
    </li>
-   <li><a href='#'><span>Statistiques</span></a></li>
+   <li><a href='<?php echo base_url();?>index.php/Statistiques'><span>Statistiques</span></a></li>
 </ul>
 </div>
 
