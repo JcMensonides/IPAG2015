@@ -13,7 +13,12 @@ foreach ( $listEditionConcours as $uneEdition ) {
 </div>
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "critere".$i; ?>');">Pour l'ensemble des concours</h1>
 	<div id="<?php echo "critere".$i; ?>" style="display: none">
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">Sans critere</h1>
+	
+	
+		<?php echo form_open('Statistiques/stats_tous_concours')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $uneEdition['debutAnneeScolaire'];?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Statistiques" />
+		</form>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du sexe</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la situation boursiere</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la provenance</h1>
@@ -163,7 +168,10 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
 </div>
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "critere".$i; ?>');">Pour l'ensemble des concours</h1>
 	<div id="<?php echo "critere".$i; ?>" style="display: none">
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">Sans critere</h1>
+		<?php echo form_open('Statistiques/stats_tous_concours')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $uneEdition['debutAnneeScolaire'];?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Statistiques" />
+		</form>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du sexe</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la situation boursiere</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la provenance</h1>
