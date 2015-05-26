@@ -108,7 +108,7 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
 					echo "style=\"color: blue\">Oui";
 				}
 				else {
-					echo "Non";
+					echo ">Non";
 				}?>
 				</label>
 			</li>
@@ -140,25 +140,6 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
 				value="<?php echo $uneEdition['NumEditionConcours'];?>" /> <input
 				class="btn btn-danger btn-lg" type="submit" name="moreInfos"
 				value="Plus d'infos" />
-				</form>
-			</li>
-	
-			<li class="plan-action">
-                    	<?php echo form_open('Concours/modifierConcours')?>
-                    		<input type="hidden" name=NumConcours
-				value="<?php echo $uneEdition['NumConcours'];?>" /> <input
-				type="hidden" name=ancienNomConcours
-				value="<?php echo $uneEdition['LibelleConcours'];?>" /> <input
-				class="btn btn-danger btn-lg" type="submit" name="modifierConcours"
-				value="Modifier" />
-				</form>
-			</li>
-			<li class="plan-action">
-                    	<?php echo form_open('Concours/supprimerConcours')?>
-                    		<input type="hidden" name=NumConcours
-				value="<?php echo $uneEdition['NumConcours'];?>" /> <input
-				class="btn btn-danger btn-lg" type="submit" name="supprimerConcours"
-				value="Supprimer" />
 				</form>
 			</li>
 

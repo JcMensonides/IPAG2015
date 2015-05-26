@@ -32,7 +32,7 @@ class ET_inscription_concours extends CI_Controller {
 		public function inscription() {
 			if($this->session->userdata('numEtudiant')!=="admin"){
 				$this->ET_inscription_concours_model->inscriptionEditionConcours();
-				//redirect("etudiant/ET_inscription_edition_concours");
+				$this->mesConcours();
 			}
 		}
 		

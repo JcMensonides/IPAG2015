@@ -6,6 +6,51 @@ class EditionConcours_model extends CI_Model {
                 $this->load->database();
         }
         
+        public function getInfosEditionConcours(){
+        	$sql = "SELECT *
+					from editionconcours ec
+					join concours c on c.numconcours=ec.numconcours
+					left join epreuvesecrites ee on ee.numepreuvesecrites=ec.numepreuvesecrites
+					left join epreuvesorales eo on eo.numepreuvesorales=ec.numepreuvesorales
+					left join qcm on qcm.numqcm=ec.numqcm
+					left join testsphysiques tph on tph.numtestsphysiques=ec.numtestsphysiques
+					left join testspsychotechniques tps on tps.numtestspsychotechniques=ec.numtestspsychotechniques
+        			WHERE ec.numeditionconcours= ?";
+        
+        	$infos = $this->db->query($sql, array($this->input->post('NumEditionConcours')))->result_array();
+        	 
+        	 
+        	
+        	//liste des matieres ecrites
+        	if($infos[0]['numEpreuvesEcrites']!== null){
+        		$sql= "select matiere.numMatiere, matiere.libelleMatiere
+						from matiere
+						where numEpreuvesEcrites = ?";
+        		$listMatieresEcrites = $this->db->query($sql, array($infos[0]['numEpreuvesEcrites']))->result_array();
+        	}
+        	else {
+        		$listMatieresEcrites = null;
+        	}
+        	 
+        
+        	//liste des matieres orales
+        	if($infos[0]['numEpreuvesOrales']!== null){
+        		$sql= "select matiere.numMatiere, matiere.libelleMatiere
+						from matiere
+						where numEpreuvesOrales = ?";
+        		$listMatieresOrales = $this->db->query($sql, array($infos[0]['numEpreuvesOrales']))->result_array();
+        	}
+        	else {
+        		$listMatieresOrales = null;
+        	}
+        	 
+        	return array(
+        			'infos' => $infos,
+        			'listMatieresEcrites' => $listMatieresEcrites,
+        			'listMatieresOrales' => $listMatieresOrales,
+        	);
+        }
+        
         public function ajoutEditionConcours(){
         	
         	//creation de l'edition
