@@ -86,7 +86,7 @@ class Statistiques extends CI_Controller {
 					$contenu .="Nombre d'admis au QCM".";";
 				if($presenceEcrits=="oui")
 					$contenu .="Nombre d'admis aux ecrits".";";
-				if($presenceOraux)
+				if($presenceOraux=="oui")
 					$contenu .="Nombre d'admis aux oraux".";";
 				
 				if($presenceOraux=="oui")
@@ -150,6 +150,27 @@ class Statistiques extends CI_Controller {
 					
 				$contenu .=PHP_EOL.PHP_EOL;
 				
+			//Liste des etudiants admissibles
+			if($presenceOraux=="oui"){
+					$contenu .="Listes des admissibles".PHP_EOL.PHP_EOL;
+					$contenu .="Numero etudiant; Nom; Prenom; Diplome national courant;".PHP_EOL;
+					if($presenceEcrits=="oui"){
+						foreach($data['listeAdmisEcrits'] as $unAdmissible){
+							$contenu .= $unAdmissible['NumEtudiant'].";".$unAdmissible['Nom'].";".$unAdmissible['Prenom'].";".$unAdmissible['diplomeNationalCourant'].";".PHP_EOL;
+						}
+					}
+					elseif($presenceQCM=="oui") {
+						foreach($data['listeAdmisEcrits'] as $unAdmissible){
+							$contenu .= $unAdmissible['NumEtudiant'].";".$unAdmissible['Nom'].";".$unAdmissible['Prenom'].";".$unAdmissible['diplomeNationalCourant'].";".PHP_EOL;
+						}
+					}
+					else {
+						foreach($data['listeAdmisEcrits'] as $unAdmissible){
+							$contenu .= $unAdmissible['NumEtudiant'].";".$unAdmissible['Nom'].";".$unAdmissible['Prenom'].";".$unAdmissible['diplomeNationalCourant'].";".PHP_EOL;
+						}
+					}		
+				}
+				
 				
 				$name = 'Statistiques_'.$data['concours']."_".$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
 				force_download($name, $contenu); 
@@ -166,7 +187,7 @@ class Statistiques extends CI_Controller {
 					$contenu .= $this->preparer_chaine_a_inserer($uneEdition);
 				}
 				
-				$name = 'Statistiques_Tous_Concours_'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				$name = 'Statistiques_Tous_Concours_'.$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
@@ -471,7 +492,7 @@ class Statistiques extends CI_Controller {
 					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Sexe");
 				}
 					
-				$name = 'Statistiques_Tous_Concours_par_sexe'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				$name = 'Statistiques_Tous_Concours_par_sexe'.$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
@@ -485,7 +506,7 @@ class Statistiques extends CI_Controller {
 					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Boursier");
 				}
 					
-				$name = 'Statistiques_Tous_Concours_par_boursier'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				$name = 'Statistiques_Tous_Concours_par_boursier'.$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
@@ -499,7 +520,7 @@ class Statistiques extends CI_Controller {
 					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Origine");
 				}
 					
-				$name = 'Statistiques_Tous_Concours_par_origine'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				$name = 'Statistiques_Tous_Concours_par_origine'.$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
@@ -514,7 +535,7 @@ class Statistiques extends CI_Controller {
 					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Dernier diplome");
 				}
 					
-				$name = 'Statistiques_Tous_Concours_par_dernierdiplome'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				$name = 'Statistiques_Tous_Concours_par_dernierdiplome'.$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
@@ -528,7 +549,7 @@ class Statistiques extends CI_Controller {
 					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Diplome national courant");
 				}
 					
-				$name = 'Statistiques_Tous_Concours_par_diplomenationalcourant'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				$name = 'Statistiques_Tous_Concours_par_diplomenationalcourant'.$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
@@ -542,8 +563,10 @@ class Statistiques extends CI_Controller {
 					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Annee de naissance");
 				}
 					
-				$name = 'Statistiques_Tous_Concours_par_age'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				$name = 'Statistiques_Tous_Concours_par_age'.$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
+		
+		
 }

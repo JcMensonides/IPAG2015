@@ -23,15 +23,27 @@ class Statistiques_model extends CI_Model {
 				where p.numetudiant=e.numetudiant and numeditionconcours=?";
        	$nbInscrits= $this->db->query($sql, array($this->input->post('NumEditionConcours')))->result_array()[0]['nbInscrits'];
        	
+       	//etudiants inscrits au concours
+       	$sql = "select *
+				from participer p, etudiant e
+				where p.numetudiant=e.numetudiant and numeditionconcours=?";
+       	$listeInscrits= $this->db->query($sql, array($this->input->post('NumEditionConcours')))->result_array();
+       	
        	//nomdre d'admis au qcm
        	if($infos[0]['numQCM'] !== null) {
        		$sql= "select count(*) as nbAdmisQCM
 					from etreadmisqcm
 					where numqcm= ? and admisqcm='admis'";
        		$nbAdmisQCM = $this->db->query($sql, array($infos[0]['numQCM']))->result_array()[0]['nbAdmisQCM'];
+       		//etudiants ayant reussi le qcm
+       		$sql= "select *
+					from etreadmisqcm, etudiant e
+					where numqcm= ? and admisqcm='admis' and etreadmisqcm.numetudiant=e.numetudiant";
+       		$listeAdmisQCM = $this->db->query($sql, array($infos[0]['numQCM']))->result_array();
        	}
        	else {
        		$nbAdmisQCM = null;
+       		$listeAdmisQCM = null;
        	}
        	
        	//nombre d'admis a l'ecrit
@@ -40,9 +52,15 @@ class Statistiques_model extends CI_Model {
 					from etreadmisecrits
 					where numepreuvesecrites= ? and admisecrits='admis'";
        		$nbAdmisEcrits = $this->db->query($sql, array($infos[0]['numEpreuvesEcrites']))->result_array()[0]['nbAdmisEcrits'];
+       		//etudiants ayant reussi l'ecrit
+       		$sql= "select *
+					from etreadmisecrits, etudiant e
+					where numepreuvesecrites= ? and admisecrits='admis' and etreadmisecrits.numetudiant=e.numetudiant";
+       		$listeAdmisEcrits = $this->db->query($sql, array($infos[0]['numEpreuvesEcrites']))->result_array();
        	}
        	else {
        		$nbAdmisEcrits = null;
+       		$listeAdmisEcrits = null;
        	}
        	
        	//nombre d'admis a l'oral
@@ -51,9 +69,15 @@ class Statistiques_model extends CI_Model {
 					from etreadmisoraux
 					where numepreuvesorales= ? and admisoraux='admis'";
        		$nbAdmisOraux = $this->db->query($sql, array($infos[0]['numEpreuvesOrales']))->result_array()[0]['nbAdmisOraux'];
+       	//liste admis oraux
+       		$sql= "select *
+					from etreadmisoraux, etudiant e
+					where numepreuvesorales= ? and admisoraux='admis' and etreadmisoraux.numetudiant=e.numetudiant";
+       		$listeAdmisOraux = $this->db->query($sql, array($infos[0]['numEpreuvesOrales']))->result_array();
        	}
        	else {
        		$nbAdmisOraux = null;
+       		$listeAdmisOraux = null;
        	}
        	
        	$result= array(
@@ -65,6 +89,10 @@ class Statistiques_model extends CI_Model {
        			'nbAdmisQCM' => $nbAdmisQCM,
        			'nbAdmisEcrits' => $nbAdmisEcrits,
        			'nbAdmisOraux' => $nbAdmisOraux,
+       			'listeInscrits' => $listeInscrits,
+       			'listeAdmisQCM' => $listeAdmisQCM,
+       			'listeAdmisEcrits' => $listeAdmisEcrits,
+       			'listeAdmisOraux' => $listeAdmisOraux,
        	);
 
        	return $result;
