@@ -16,33 +16,54 @@ foreach ( $listEditionConcours as $uneEdition ) {
 	
 	
 		<?php echo form_open('Statistiques/stats_tous_concours')?>
-			<input type="hidden" name= debutAnneeScolaire value="<?php echo $uneEdition['debutAnneeScolaire'];?>" />
-          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Statistiques" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Sans criteres" />
 		</form>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du sexe</h1>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_avec_critere')?>
+			<input type="hidden" name= critere value="sexe"/>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du sexe" />
+		</form>
+		
+		
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la situation boursiere</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la provenance</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de l'age</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du dernier diplome obtenu</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du diplome national courant</h1>
 	</div>
+	
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "cat".$i; ?>');"> Pour une categorie de concours</h1>
 	<div id="<?php echo "cat".$i; ?>" style="display: none">
 		<?php foreach($categorie_de_l_annee as $uneCategorie) {?>
-			<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687"><?php echo $uneCategorie;?></h1>
+		<?php echo form_open('Statistiques/stats_une_categorie')?>
+			<input type="hidden" name= categorie value="<?php if($uneCategorie != "Sans Categorie"){echo $uneCategorie;}else{echo "";}?>" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="<?php echo $uneCategorie;?>" />
+		</form>
 		<?php }?>
 	</div>
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "th".$i; ?>');"> Pour un theme de concours</h1>
 	<div id="<?php echo "th".$i; ?>" style="display: none">
 		<?php foreach($theme_de_l_annee as $unth) {?>
-			<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687"><?php echo $unth;?></h1>
+			<?php echo form_open('Statistiques/stats_un_theme')?>
+			<input type="hidden" name= theme value="<?php if($unth != "Sans Theme"){echo $unth;}else{echo "";}?>" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="<?php echo $unth;?>" />
+		</form>
 		<?php }?>
 	</div>
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "coupleThemeCat".$i; ?>');"> Pour un couple theme categorie</h1>
 	<div id="<?php echo "coupleThemeCat".$i; ?>" style="display: none">
 		<?php foreach($categorie_de_l_annee as $uneCategorie) {
 			foreach($theme_de_l_annee as $unth) {?>
-			<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687"><?php echo "Cat: ".$uneCategorie." Theme: ".$unth;?></h1>
+			<?php echo form_open('Statistiques/stats_couple_theme_cat')?>
+			<input type="hidden" name= categorie value="<?php if($uneCategorie != "Sans Categorie"){echo $uneCategorie;}else{echo "";}?>" />
+			<input type="hidden" name= theme value="<?php if($unth != "Sans Theme"){echo $unth;}else{echo "";}?>" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="<?php echo "Cat: ".$uneCategorie."  /  Theme: ".$unth;?>" />
+		</form>
 			<?php }
 			
 		}?>
@@ -161,47 +182,72 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
 	</div>
 
 		
-		
-	<?php $i++;} ?>
+
+	<?php $i++;
+	$last_As = $uneEdition['debutAnneeScolaire'];} ?>
 	
 </div>
 </div>
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "critere".$i; ?>');">Pour l'ensemble des concours</h1>
 	<div id="<?php echo "critere".$i; ?>" style="display: none">
+	
+	
 		<?php echo form_open('Statistiques/stats_tous_concours')?>
-			<input type="hidden" name= debutAnneeScolaire value="<?php echo $uneEdition['debutAnneeScolaire'];?>" />
-          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Statistiques" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Sans criteres" />
 		</form>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du sexe</h1>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_avec_critere')?>
+			<input type="hidden" name= critere value="sexe"/>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du sexe" />
+		</form>
+		
+		
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la situation boursiere</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la provenance</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de l'age</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du dernier diplome obtenu</h1>
 		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du diplome national courant</h1>
 	</div>
+	
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "cat".$i; ?>');"> Pour une categorie de concours</h1>
 	<div id="<?php echo "cat".$i; ?>" style="display: none">
 		<?php foreach($categorie_de_l_annee as $uneCategorie) {?>
-			<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687"><?php echo $uneCategorie;?></h1>
+		<?php echo form_open('Statistiques/stats_une_categorie')?>
+			<input type="hidden" name= categorie value="<?php if($uneCategorie != "Sans Categorie"){echo $uneCategorie;}else{echo "";}?>" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="<?php echo $uneCategorie;?>" />
+		</form>
 		<?php }?>
 	</div>
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "th".$i; ?>');"> Pour un theme de concours</h1>
 	<div id="<?php echo "th".$i; ?>" style="display: none">
 		<?php foreach($theme_de_l_annee as $unth) {?>
-			<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687"><?php echo $unth;?></h1>
+			<?php echo form_open('Statistiques/stats_un_theme')?>
+			<input type="hidden" name= theme value="<?php if($unth != "Sans Theme"){echo $unth;}else{echo "";}?>" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="<?php echo $unth;?>" />
+		</form>
 		<?php }?>
 	</div>
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "coupleThemeCat".$i; ?>');"> Pour un couple theme categorie</h1>
 	<div id="<?php echo "coupleThemeCat".$i; ?>" style="display: none">
 		<?php foreach($categorie_de_l_annee as $uneCategorie) {
 			foreach($theme_de_l_annee as $unth) {?>
-			<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687"><?php echo "Cat: ".$uneCategorie." Theme: ".$unth;?></h1>
+			<?php echo form_open('Statistiques/stats_couple_theme_cat')?>
+			<input type="hidden" name= categorie value="<?php if($uneCategorie != "Sans Categorie"){echo $uneCategorie;}else{echo "";}?>" />
+			<input type="hidden" name= theme value="<?php if($unth != "Sans Theme"){echo $unth;}else{echo "";}?>" />
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="<?php echo "Cat: ".$uneCategorie."  /  Theme: ".$unth;?>" />
+		</form>
 			<?php }
 			
 		}?>
 	</div>
 </div>
 </div>
+	
 	
 	<script type="text/javascript">
 <!--

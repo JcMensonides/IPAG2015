@@ -288,4 +288,68 @@ class Statistiques extends CI_Controller {
 			return $contenu;
 		}
 		
+		public function stats_une_categorie(){
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_une_categorie();
+			
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer($uneEdition);
+				}
+			
+				$name = 'Statistiques_Categorie_'.$this->input->post('categorie')."_".$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
+		
+		public function stats_un_theme() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_un_theme();
+					
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer($uneEdition);
+				}
+				//.$data['anneeScolaire']."_".($data['anneeScolaire']+1).
+				$name = 'Statistiques_Theme_'.$this->input->post('theme')."_".$data[0]['anneeScolaire']."_".($data[0]['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
+		
+		public function stats_couple_theme_cat(){
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_couple_theme_cat();
+				
+					
+				$contenu = "";
+				if(!empty($data)){
+					foreach ($data as $uneEdition) {
+						$contenu .= $this->preparer_chaine_a_inserer($uneEdition);
+					}
+				}
+				else {
+					$contenu="Pas de concours correspondants";
+				}
+
+				$name = 'Statistiques_Categorie_'.$this->input->post('categorie').'_Theme_'.$this->input->post('theme').".csv";
+				force_download($name, $contenu);
+				
+				
+			}
+		}
+		
+		public function stats_tous_concours_avec_critere() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_tous_concours_avec_critere($this->input->post('critere'));
+			
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer($uneEdition);
+				}
+			
+				$name = 'Statistiques_Tous_Concours_'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
+		
 }
