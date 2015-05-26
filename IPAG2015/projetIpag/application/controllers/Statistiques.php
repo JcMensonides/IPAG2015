@@ -215,7 +215,7 @@ class Statistiques extends CI_Controller {
 				$contenu .="Nombre d'admis au QCM".";";
 			if($presenceEcrits=="oui")
 				$contenu .="Nombre d'admis aux ecrits".";";
-			if($presenceOraux)
+			if($presenceOraux=="oui")
 				$contenu .="Nombre d'admis aux oraux".";";
 				
 			if($presenceOraux=="oui")
@@ -338,18 +338,212 @@ class Statistiques extends CI_Controller {
 			}
 		}
 		
-		public function stats_tous_concours_avec_critere() {
+		
+		
+		public function preparer_chaine_a_inserer_avec_critere($data, $nomDuCritere){
+			//On prepare l'entete du fichier
+			$contenu = $nomDuCritere."; Concours; Categorie; Theme; Annee Scolaire; Presence de QCM; Presence d'epreuves ecrites; Presence d'epreuves orales".";";
+				
+			if ($data['categorie'] !== null){
+				$nomCategorie = $data['categorie'];
+			}
+			else {
+				$nomCategorie = "Pas de categorie";
+			}
+		
+			if ($data['theme'] !== null){
+				$nomTheme = $data['theme'];
+			}
+			else {
+				$nomTheme = "Pas de Theme";
+			}
+		
+			if ($data['nbAdmisQCM'] !== null) {
+				$presenceQCM = "oui";
+			}
+			else {
+				$presenceQCM = "non";
+			}
+		
+			if ($data['nbAdmisEcrits'] !== null) {
+				$presenceEcrits = "oui";
+			}
+			else {
+				$presenceEcrits = "non";
+			}
+		
+			if ($data['nbAdmisOraux'] !== null) {
+				$presenceOraux = "oui";
+			}
+			else {
+				$presenceOraux = "non";
+			}
+				
+			$contenu .="Nombre d'inscrits".";";
+			if($presenceQCM=="oui")
+				$contenu .="Nombre d'admis au QCM".";";
+			if($presenceEcrits=="oui")
+				$contenu .="Nombre d'admis aux ecrits".";";
+			if($presenceOraux=="oui")
+				$contenu .="Nombre d'admis aux oraux".";";
+		
+			if($presenceOraux=="oui")
+				$contenu .="taux d'admissibles".";";
+			$contenu .="taux d'admis".";".PHP_EOL;
+				
+				
+				
+				
+			//On rempli le contenu du fichier
+			$i=0;
+			foreach($data['nbInscrits'] as $uneLigne){
+			$contenu .= $data['modalites'][$i].";".$data['concours'].";".$nomCategorie.";".$nomTheme.";".$data['anneeScolaire']." - ".($data['anneeScolaire']+1).";".$presenceQCM.";".$presenceEcrits.";".$presenceOraux.";";
+				
+				$contenu .=$data['nbInscrits'][$i]['nbInscrits'].";";
+				if($presenceQCM=="oui")
+					$contenu .=$data['nbAdmisQCM'][$i]['nbAdmisQCM'].";";
+				if($presenceEcrits=="oui")
+					$contenu .=$data['nbAdmisEcrits'][$i]['nbAdmisEcrits'].";";
+				if($presenceOraux=="oui")
+					$contenu .=$data['nbAdmisOraux'][$i]['nbAdmisOraux'].";";
+				
+				//admissibles
+				if($presenceOraux=="oui"){
+					if($presenceEcrits=="oui"){
+						if($data['nbInscrits'][$i]['nbInscrits'] == 0){
+							$contenu .="1".";";
+						}
+						else {
+							$contenu .=($data['nbAdmisEcrits'][$i]['nbAdmisEcrits']/$data['nbInscrits'][$i]['nbInscrits']).";";
+						}
+					}
+					elseif($presenceQCM=="oui") {
+						if($data['nbInscrits'][$i]['nbInscrits'] == 0){
+							$contenu .="1".";";
+						}
+						else {
+							$contenu .=($data['nbAdmisQCM'][$i]['nbAdmisQCM']/$data['nbInscrits'][$i]['nbInscrits']).";";
+						}
+					}
+					else {
+						$contenu .="1".";";
+					}
+				}
+				
+				
+				//taux d'admis
+				if($presenceOraux=="oui"){
+					if($data['nbInscrits'][$i]['nbInscrits'] == 0)
+						$contenu .="1".";";
+					else
+						$contenu .=($data['nbAdmisOraux'][$i]['nbAdmisOraux']/$data['nbInscrits'][$i]['nbInscrits']).";";
+				}
+				elseif($presenceEcrits=="oui"){
+					if($data['nbInscrits'][$i]['nbInscrits'] == 0)
+						$contenu .="1".";";
+					else
+						$contenu .=($data['nbAdmisEcrits'][$i]['nbAdmisEcrits']/$data['nbInscrits'][$i]['nbInscrits']).";";
+				}
+				elseif($presenceQCM=="oui"){
+					if($data['nbInscrits'][$i]['nbInscrits'] == 0)
+						$contenu .="1".";";
+					else
+						$contenu .=($data['nbAdmisQCM'][$i]['nbAdmisQCM']/$data['nbInscrits'][$i]['nbInscrits']).";";
+				}
+				else {
+					$contenu .="1".";";
+				}
+				
+				$contenu .=PHP_EOL;
+				$i++;
+			}
+			$contenu .=PHP_EOL.PHP_EOL.PHP_EOL;
+				
+			return $contenu;
+		}
+		
+		public function stats_tous_concours_par_sexe() {
 			if($this->session->userdata('numEtudiant')=="admin"){
-				$data = $this->Statistiques_model->stats_tous_concours_avec_critere($this->input->post('critere'));
-			
+				$data = $this->Statistiques_model->stats_tous_concours_par_sexe();
+					
 				$contenu = "";
 				foreach ($data as $uneEdition) {
-					$contenu .= $this->preparer_chaine_a_inserer($uneEdition);
+					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Sexe");
 				}
-			
-				$name = 'Statistiques_Tous_Concours_'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+					
+				$name = 'Statistiques_Tous_Concours_par_sexe'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
 				force_download($name, $contenu);
 			}
 		}
 		
+		public function stats_tous_concours_par_boursier() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_tous_concours_par_boursier();
+					
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Boursier");
+				}
+					
+				$name = 'Statistiques_Tous_Concours_par_boursier'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
+		
+		public function stats_tous_concours_par_origine() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_tous_concours_par_origine();
+					
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Origine");
+				}
+					
+				$name = 'Statistiques_Tous_Concours_par_origine'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
+		
+		
+		public function stats_tous_concours_par_dernierdiplome() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_tous_concours_par_dernierdiplome();
+					
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Dernier diplome");
+				}
+					
+				$name = 'Statistiques_Tous_Concours_par_dernierdiplome'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
+		
+		public function stats_tous_concours_par_diplomenationalcourant() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_tous_concours_par_diplomenationalcourant();
+					
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Diplome national courant");
+				}
+					
+				$name = 'Statistiques_Tous_Concours_par_diplomenationalcourant'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
+		
+		public function stats_tous_concours_par_age() {
+			if($this->session->userdata('numEtudiant')=="admin"){
+				$data = $this->Statistiques_model->stats_tous_concours_par_age();
+					
+				$contenu = "";
+				foreach ($data as $uneEdition) {
+					$contenu .= $this->preparer_chaine_a_inserer_avec_critere($uneEdition, "Annee de naissance");
+				}
+					
+				$name = 'Statistiques_Tous_Concours_par_age'.$data['anneeScolaire']."_".($data['anneeScolaire']+1).".csv";
+				force_download($name, $contenu);
+			}
+		}
 }

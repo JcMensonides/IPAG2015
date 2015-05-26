@@ -20,18 +20,36 @@ foreach ( $listEditionConcours as $uneEdition ) {
           <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Sans criteres" />
 		</form>
 		
-		<?php echo form_open('Statistiques/stats_tous_concours_avec_critere')?>
-			<input type="hidden" name= critere value="sexe"/>
+		<?php echo form_open('Statistiques/stats_tous_concours_par_sexe')?>
 			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
           <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du sexe" />
 		</form>
 		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_boursier')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En de la situation boursiere" />
+		</form>
 		
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la situation boursiere</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la provenance</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de l'age</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du dernier diplome obtenu</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du diplome national courant</h1>
+		<?php echo form_open('Statistiques/stats_tous_concours_par_origine')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction de la provenance" />
+		</form>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_age')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction de l'age" />
+		</form>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_dernierdiplome')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du dernier diplome obtenu" />
+		</form>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_diplomenationalcourant')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du diplome national courant" />
+		</form>
+		
 	</div>
 	
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "cat".$i; ?>');"> Pour une categorie de concours</h1>
@@ -197,18 +215,36 @@ $previous_LibTheme = $uneEdition ['LibelleTheme'];
           <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="Sans criteres" />
 		</form>
 		
-		<?php echo form_open('Statistiques/stats_tous_concours_avec_critere')?>
-			<input type="hidden" name= critere value="sexe"/>
+		<?php echo form_open('Statistiques/stats_tous_concours_par_sexe')?>
 			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
           <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du sexe" />
 		</form>
 		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_boursier')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En de la situation boursiere" />
+		</form>
 		
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la situation boursiere</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de la provenance</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction de l'age</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du dernier diplome obtenu</h1>
-		<h1 class="themeButton" style="width: 80%;margin-left: auto; background-color: #4D6687">En fonction du diplome national courant</h1>
+		<?php echo form_open('Statistiques/stats_tous_concours_par_origine')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction de la provenance" />
+		</form>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_age')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction de l'age" />
+		</form>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_dernierdiplome')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du dernier diplome obtenu" />
+		</form>
+		
+		<?php echo form_open('Statistiques/stats_tous_concours_par_diplomenationalcourant')?>
+			<input type="hidden" name= debutAnneeScolaire value="<?php echo $last_As;?>" />
+          <input class="themeButton" style="width: 80%;margin-left: 20%; background-color: #4D6687" type="submit" name="stats_un_concours" value="En fonction du diplome national courant" />
+		</form>
+		
 	</div>
 	
 	<h1 class="themeButton" style="width: 90%;margin-left: auto" onclick="toggle_visibility('<?php echo "cat".$i; ?>');"> Pour une categorie de concours</h1>
